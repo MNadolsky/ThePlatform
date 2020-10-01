@@ -1,3 +1,10 @@
+# ThePlatform
+chromedriver
+chromedriver.exe
+secure.py
+debug.py
+*.swp
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
