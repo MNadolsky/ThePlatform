@@ -4,11 +4,10 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 
 import config
-import secure
+import secure.creds
+import secure.cookies
 
 import time
-
-import cookies
 
 
 
@@ -39,6 +38,7 @@ class Login(unittest.TestCase):
         email_field.send_keys(secure.CBuser)
         pass_field.send_keys(secure.CBpass)
         sign_in_button.click()
+
         self.assertEqual(self.driver.current_url, homepage_url + '/dashboard')
 
     def tearDown(self):

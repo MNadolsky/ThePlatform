@@ -1,9 +1,11 @@
 # ThePlatform
 chromedriver
 chromedriver.exe
-secure.py
+/secure/*
 debug.py
 *.swp
+
+!/secure/.gitkeep
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
