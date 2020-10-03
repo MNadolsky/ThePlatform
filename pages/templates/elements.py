@@ -32,10 +32,19 @@ class Button(Element):
 
     def click(self):
 
-        print(self.locator)
         wait(self.driver,10).until(EC.element_to_be_clickable(self.locator))
         self.element().click()
         if self.wait_locator: wait(self.driver,10).until(EC.visibility_of_element_located(self.wait_locator))
+
+
+
+#class Link(Button):
+class Link(Element):
+
+    def click(self):
+
+        wait(self.driver,10).until(EC.element_to_be_clickable(self.locator))
+        self.element().click()
 
 
 
@@ -44,5 +53,37 @@ class Field(Element):
     def click(self): self.element().click()
     def input(self, keys): self.element().send_keys(keys)
     def clear(self): self.element().clear()
+
+
+
+class ReactiveMenu(Element):
+
+    def open(self):
+
+        self.element().click()
+
+    def select(self, item_text):
+
+        self.element().click()
+
+        # Alternate method included in case it turns out to be better
+        #item_path = f"//*[normalize-space()='{item_text}']"
+        item_xpath = f"//*[.='{item_text}']"
+        item = Link(self.driver, XPATH=item_xpath)
+        item.click()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
