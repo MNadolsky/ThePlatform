@@ -27,7 +27,7 @@ class Login(unittest.TestCase):
         # the authentication, so I just signed in with that option, signed out, 
         # grabbed all the cookes and dumped them in a file every cookie that 
         # would be present on signout is simply added to the new session 
-        for cookie in cookies.coinbase: self.driver.add_cookie(cookie)
+        for cookie in secure.cookies.coinbase: self.driver.add_cookie(cookie)
 
     def runTest(self):
 
@@ -35,8 +35,8 @@ class Login(unittest.TestCase):
         pass_field = self.driver.find_element_by_id('password')
         sign_in_button = self.driver.find_element_by_id('signin_button')
 
-        email_field.send_keys(secure.CBuser)
-        pass_field.send_keys(secure.CBpass)
+        email_field.send_keys(secure.creds.CBuser)
+        pass_field.send_keys(secure.creds.CBpass)
         sign_in_button.click()
 
         self.assertEqual(self.driver.current_url, homepage_url + '/dashboard')
