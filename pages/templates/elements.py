@@ -25,7 +25,6 @@ class Button(Element):
     def __init__(self, driver, locator, wait_for=None):
 
         super().__init__(driver, locator)
-
         self.wait_locator = wait_for
 
     def click(self):
