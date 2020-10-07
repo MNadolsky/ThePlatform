@@ -8,27 +8,25 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class Element:
 
-    def __init__(self, driver, **locator):
+    def __init__(self, driver, locator):
 
         self.driver = driver
-
-        self.locator_key = list(locator.keys())[0]
-        self.locator_value = locator[self.locator_key]
-        self.locator = (eval('by.' + self.locator_key), self.locator_value)
+        self.locator = locator
 
     def element(self):
 
         wait(self.driver,10).until(EC.visibility_of_element_located(self.locator))
         return self.driver.find_element(*self.locator)
 
+
+
 class Button(Element):
 
-    def __init__(self, driver, wait_for=None, **locators):
+    def __init__(self, driver, locator, wait_for=None):
 
-        super().__init__(driver, **locators)
+        super().__init__(driver, locator)
 
-        self.wait_locator = None
-        if wait_for is not None: self.wait_locator = (by.XPATH, wait_for)
+        self.wait_locator = wait_for
 
     def click(self):
 
@@ -38,7 +36,6 @@ class Button(Element):
 
 
 
-#class Link(Button):
 class Link(Element):
 
     def click(self):
@@ -64,15 +61,15 @@ class ReactiveMenu(Element):
 
     def select(self, item_text):
 
+        # wrap the below click in a conditional - if the menue is already open
+        # (.open() was already used) don't click
         self.element().click()
 
         # Alternate method included in case it turns out to be better
-        #item_path = f"//*[normalize-space()='{item_text}']"
-        item_xpath = f"//*[.='{item_text}']"
-        item = Link(self.driver, XPATH=item_xpath)
+        #item_loc = (by.XPATH, f"//*[normalize-space()='{item_text}']")
+        item_loc = (by.XPATH, f"//*[.='{item_text}']")
+        item = Link(self.driver, item_loc)
         item.click()
-
-
 
 
 
