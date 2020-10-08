@@ -8,10 +8,12 @@ import config
 
 class Sign_In_Page():
 
-    def __init__(self,driver, bool=None):  #if the driver is starting at the sign in page use keyword argument True at instantiation 
+    def __init__(self,driver, list = None, bool=None):  #1st keyword arg: load a list of cookes, if thre is no cookie list put in None,
+                                                        #2nd keyword arg: to start the driver at the sign in page input True at instantiation 
         self.driver = driver
         if bool: driver.get(config.coinbase_homepage_url+'/signin')
-        for cookie in secure.cookies.coinbase: self.driver.add_cookie(cookie)
+        if list != None:
+            for cookie in list: self.driver.add_cookie(cookie)
     
     # coinbase has two-factor authentication which involves sending a text
     # via cellphone; it is optional to forego this authentication, so 
