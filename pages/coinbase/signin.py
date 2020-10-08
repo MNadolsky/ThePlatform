@@ -26,7 +26,7 @@ class SigninPage:
 
     # BODY
 
-    user_field_loc =                (by.ID, 'email')
+    email_field_loc =               (by.ID, 'email')
     pass_field_loc =                (by.ID, 'password')
     stay_signed_in_checkbox_loc =   (by.ID, 'stay_signed_in')
     sign_in_button_loc =            (by.ID, 'signin_button')
@@ -49,7 +49,7 @@ class SigninPage:
         
         # BODY
 
-        self.user_field = Field(self.driver, self.user_field_loc)
+        self.email_field = Field(self.driver, self.email_field_loc)
         self.pass_field = Field(self.driver, self.pass_field_loc)
         self.stay_signed_in_checkbox = ''
         self.sign_in_button = Button(self.driver, self.sign_in_button_loc)
