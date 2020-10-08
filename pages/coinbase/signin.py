@@ -1,15 +1,20 @@
 
 import config
+import secure.cookies
 from pages.templates.elements import *
 
 
 
 class SigninPage:
 
-    def __init__(self, driver, drivethrough=True):
+    def __init__(self, driver, drivethrough=True, inject_cookies=True):
 
         # sign in page title: Coinbase - Buy/Sell Digital Currency
         if not drivethrough: driver.get(config.coinbase_domain + '/signin')
+        if inject_cookies:
+            for cookie in secure.cookies.coinbase: 
+                driver.add_cookie(cookie)
+
         self.driver = driver
 
         self.build_elements()
