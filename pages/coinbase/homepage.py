@@ -1,10 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import secure.cookies
 import config
 
-
-#sign_in_button_loc = (By.XPATH,"//a[@title='Sign in']")
 
 class Home_Page():
 
