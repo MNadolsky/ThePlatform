@@ -4,7 +4,7 @@ import secure.cookies
 import config
 
 
-sign_in_button_loc = (By.XPATH,"//a[@title='Sign in']")
+#sign_in_button_loc = (By.XPATH,"//a[@title='Sign in']")
 
 class Home_Page():
 
@@ -12,7 +12,7 @@ class Home_Page():
         self.driver = driver
         driver.get(config.coinbase_homepage_url)
 
-
+    sign_in_button_loc = (By.XPATH,"//a[@title='Sign in']")
     def click_home_page_sign_in_button(self):
-        self.driver.find_element(*sign_in_button_loc).click()
+        self.driver.find_element(*self.sign_in_button_loc).click()
 
