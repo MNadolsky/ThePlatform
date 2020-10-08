@@ -12,7 +12,7 @@ class Sign_In_Page():
 
     def __init__(self,driver, get_SignIn_url: bool=None):  #if the driver is starting at the sign in page use keyword argument True at instantiation 
         self.driver = driver
-        if get_SignIn_url: driver.get(config.homepage_url+'/signin')
+        if get_SignIn_url: driver.get(config.coinbase_homepage_url+'/signin')
 
     def email_field_loc(self): return (By.ID,'email')
     def email_field(self): return self.driver.find_element(*self.email_field_loc()) 
