@@ -1,10 +1,7 @@
-
 import os
 
-windows_chromedriver = 'chromedriver.exe'
 
-chromedriver_path = os.path.dirname(os.path.realpath(__file__)) + '/resources/' + windows_chromedriver
+chromedriver_path = os.path.dirname(os.path.realpath(__file__)) + '/resources/chromedriver.exe'
 
 
-homepage_url = 'https://www.coinbase.com/'
-signInPage_url = 'https://www.coinbase.com/signin'
+coinbase_homepage_url = 'https://www.coinbase.com/'
