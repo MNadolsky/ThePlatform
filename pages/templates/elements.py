@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By as by
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
 
+import sys
 
 
 class Element:
@@ -12,6 +13,7 @@ class Element:
 
         self.driver = driver
         self.locator = locator
+        #self.element = self.element()
 
     def element(self):
 
@@ -54,23 +56,56 @@ class Field(Element):
 
 class ReactiveMenu(Element):
 
+    def __init__(self, driver, locator, wrapper_locator=None):
+
+        super().__init__(driver, locator)
+        self.wrapper_loc = wrapper_locator 
+
+    def wrapper(self):
+
+        wait(self.driver,10).until(EC.presence_of_element_located(self.wrapper_loc))
+        return self.driver.find_element(*self.wrapper_loc)
+
     def open(self):
 
         self.element().click()
 
-    def select(self, item_text):
+    def select(self, item_selector):
+        """
+        Can select by using the text of the item or the index
+        """
 
-        # wrap the below click in a conditional - if the menue is already open
-        # (.open() was already used) don't click
         self.element().click()
 
-        # Alternate method included in case it turns out to be better
-        #item_loc = (by.XPATH, f"//*[normalize-space()='{item_text}']")
-        item_loc = (by.XPATH, f"//*[.='{item_text}']")
-        item = Link(self.driver, item_loc)
+        if self.wrapper_loc:
+
+            if type(item_selector) is int:
+
+                item_loc = (by.XPATH, './/a')
+                items = self.wrapper().find_elements(*item_loc)
+                item = items[item_selector - 1]
+
+            elif type(item_selector) is str:
+
+                item_loc = (by.XPATH, f".//*[.='{item_selector}']")
+                item = self.wrapper().find_element(*item_loc)
+
+        else:
+
+            # Alternate method included in case it turns out to be better
+            #item_loc = (by.XPATH, f"//*[normalize-space()='{item_selector}']")
+            item_loc = (by.XPATH, f"//*[.='{item_selector}']")
+            item = self.driver.find_element(*item_loc)
+
+        if item.tag_name is not 'a': 
+
+            parent = item.find_element_by_xpath('..')            
+            if parent is 'a': item = parent
+
         item.click()
 
 
+            
 
 
 

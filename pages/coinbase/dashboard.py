@@ -25,10 +25,10 @@ class DashboardPage:
     trade_button_loc = (by.XPATH, '//button[.="Trade"]')
     send_button_loc = (by.XPATH, '//button[.="Send"]')
     receive_button_loc = (by.XPATH, '//button[.="Receive"]')
-
-    # ReactiveMenu needs to be modified to work with these
-    #notifications_menu_loc = (by.XPATH, "//*[contains(@class,'Bell__Icon')]")
-    #avatar_menu_loc = (by.XPATH, "//*[contains(@class,'Avatar__')]")
+    notifications_menu_loc = (by.XPATH, "//*[contains(@class,'Bell__Icon')]")
+    notifications_menu_wrapper_loc = (by.XPATH, "//div[contains(@class,'NotificationsEntry__Panel')]")
+    avatar_menu_loc = (by.XPATH, "//*[contains(@class,'Avatar__')]")
+    avatar_menu_wrapper_loc = (by.XPATH, "//div[contains(@class,'DropdownMenu__Wrapper')]")
 
     def build_elements(self):
 
@@ -42,9 +42,11 @@ class DashboardPage:
         self.trade_button = Button(self.driver, self.trade_button_loc)
         self.send_button = Button(self.driver, self.send_button_loc)
         self.receive_button = Button(self.driver, self.receive_button_loc)
-        #self.notifications_menu = 
-        #self.avatar_menu = 
-
+        self.notifications_menu = ReactiveMenu(
+            self.driver, self.notifications_menu_loc, 
+            self.notifications_menu_wrapper_loc)
+        self.avatar_menu = ReactiveMenu(
+            self.driver, self.avatar_menu_loc, self.avatar_menu_wrapper_loc)
 
 
 

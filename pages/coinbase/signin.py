@@ -1,5 +1,6 @@
 
 import config
+import secure.creds
 import secure.cookies
 from pages.templates.elements import *
 
@@ -62,6 +63,27 @@ class SigninPage:
         self.no_account_link = ''
         self.privacy_policy_link = ''
         self.two_factor_link =''       
+
+    # WORKFLOWS 
+
+    def login(self, bypass_auth=True):
+
+        if bypass_auth:
+
+            for cookie in secure.cookies.coinbase:self.driver.add_cookie(cookie)
+
+        self.email_field.input(secure.creds.CBuser)
+        self.pass_field.input(secure.creds.CBpass)
+        self.sign_in_button.click()
+
+        
+
+
+
+
+
+
+
 
 
 
