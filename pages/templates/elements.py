@@ -96,18 +96,18 @@ class ReactiveMenu(Element):
         self.wrapper_loc = wrapper_locator 
 
     def wrapper(self):
-    """
-    Find and return the element that contains the menu items)
-    """
+        """
+        Find and return the element that contains the menu items)
+        """
         wait(self.driver,10).until(
             EC.presence_of_element_located(self.wrapper_loc))
         return self.driver.find_element(*self.wrapper_loc)
 
     def open(self):
-    """
-    Open the menu without selecting an item.
-    Note: Do not use open() before using select(). See the note in select().
-    """
+        """
+        Open the menu without selecting an item.
+        Note: Do not use open() before using select(). See the note in select().
+        """
 
         self.element().click()
 
