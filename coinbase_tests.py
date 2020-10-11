@@ -17,7 +17,15 @@ class Login(unittest.TestCase):
         driver = webdriver.Chrome(config.chromedriver_path)
         self.page = SigninPage(driver, drivethrough=False)
 
-    def runTest(self):
+    def testSuccessful(self):
+        """
+        Confirm that logging in succeeds.
+
+        Acceptance Criteria
+        --------------------
+        - When a valid username and password combination is submitted through
+          /signin the user is directed to /dashboard and signed in 
+        """
 
         page = self.page
 
@@ -29,6 +37,12 @@ class Login(unittest.TestCase):
             (page.driver.current_url, config.coinbase_domain + '/dashboard')
         self.assertEqual \
             (page.driver.title, 'Coinbase')
+
+        self.assertTrue('user is', 'logged in')
+
+    def testWrongUsername(self): pass
+
+    def testWrongPassword(self): pass
 
     def tearDown(self):
 
@@ -46,13 +60,22 @@ class Logout(unittest.TestCase):
         self.page = DashboardPage(driver)
 
     def runTest(self):
+        """
+        Confirm that loggin out succeeds
+
+        Acceptance Criteria
+        - When a user logs out via the avatar menu he is redirected to
+          /signin and cannot reach /dashboard without loggin in again
+        """
 
         self.page.avatar_menu.select('Sign out')
 
         self.assertEqual \
             (self.driver.title, 'Coinbase - Buy/Sell Digital Currency')
         self.assertEqual \
-            (self.driver.current_url, config.coinbase_domain + 'signin') 
+            (self.driver.current_url, config.coinbase_domain + '/signin') 
+
+        self.assertTrue('user cannot', 'reach dashboard')
 
     def tearDown(self):
 

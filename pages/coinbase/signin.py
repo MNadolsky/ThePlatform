@@ -8,11 +8,12 @@ from pages.templates.elements import *
 
 class SigninPage:
 
-    def __init__(self, driver, drivethrough=True, inject_cookies=True):
+    def __init__(self, driver, drivethrough=True, bypass_auth=True):
 
         # sign in page title: Coinbase - Buy/Sell Digital Currency
         if not drivethrough: driver.get(config.coinbase_domain + '/signin')
-        if inject_cookies:
+        if bypass_auth:
+            #driver.delete_all_cookies()
             for cookie in secure.cookies.coinbase: 
                 driver.add_cookie(cookie)
 
@@ -39,8 +40,8 @@ class SigninPage:
     forgot_password_link_loc =      (by.LINK_TEXT, 'Forgot password?')
     no_account_link_loc =           (by.LINK_TEXT, "Don't have an account?")
     privacy_policy_link_loc =       (by.LINK_TEXT, 'Privacy Policy')
-    two_factor_link_loc = \
-        (by.LINK_TEXT, 'Have an issue with 2-factor authentication?')
+    two_factor_link_loc = (
+        by.LINK_TEXT, 'Have an issue with 2-factor authentication?')
 
     def build_elements(self):
 
@@ -55,10 +56,10 @@ class SigninPage:
         
         # BODY
 
-        self.email_field = Field(self.driver, self.email_field_loc)
-        self.pass_field = Field(self.driver, self.pass_field_loc)
+        self.email_field =          Field(self.driver, self.email_field_loc)
+        self.pass_field =           Field(self.driver, self.pass_field_loc)
         self.stay_signed_in_checkbox = ''
-        self.sign_in_button = Button(self.driver, self.sign_in_button_loc)
+        self.sign_in_button =       Button(self.driver, self.sign_in_button_loc)
         self.forgot_password_link = ''
         self.no_account_link = ''
         self.privacy_policy_link = ''
@@ -67,15 +68,34 @@ class SigninPage:
     # WORKFLOWS 
 
     def login(self, bypass_auth=True):
+        """
+        The normal user login flow beginning from /signin
+
+        inputs
+        -----
+        bypass_auth: bool
+            Two-factor authentication is manditory. When bypass_auth is true,
+            cookies for the option to bypass are added before login. The cookie
+            file is in /secure and not tracked, so one must be built:
+            1. Log in manually, choosing the option to skip two-factor auth next
+               time
+            2. Log out
+            3. Do driver.get_cookies and print the results (it's a list)
+            4. Make a file in /secure, declare a single variable, and copy and
+               paste the cookie list into the variable
+            5. Delete any newlines in the middle of the dictionary keys/values
+
+            If bypass_auth is False, the login process will require two-factor
+            auth.
+        """
 
         if bypass_auth:
-
+            #self.driver.delete_all_cookies()
             for cookie in secure.cookies.coinbase:self.driver.add_cookie(cookie)
 
         self.email_field.input(secure.creds.CBuser)
         self.pass_field.input(secure.creds.CBpass)
         self.sign_in_button.click()
-
         
 
 
