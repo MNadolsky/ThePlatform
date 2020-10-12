@@ -72,6 +72,8 @@ class SigninPage:
 
         # MISC
 
+        # This element only appears after an errant login attempt; it is the 
+        # error message popup
         self.sign_in_error_alert = Element(
             self.driver, self.sign_in_error_alert_loc)
 
