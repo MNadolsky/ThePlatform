@@ -1,4 +1,3 @@
-
 import os
 
 chromedriver_path = os.path.dirname(
