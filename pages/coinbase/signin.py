@@ -39,9 +39,14 @@ class SigninPage:
     sign_in_button_loc =            (by.ID, 'signin_button')
     forgot_password_link_loc =      (by.LINK_TEXT, 'Forgot password?')
     no_account_link_loc =           (by.LINK_TEXT, "Don't have an account?")
-    privacy_policy_link_loc =       (by.LINK_TEXT, 'Privacy Policy')
+    privacy_policy_link_loc =       (by.PARTIAL_LINK_TEXT, 'Privacy Policy')
     two_factor_link_loc = (
         by.LINK_TEXT, 'Have an issue with 2-factor authentication?')
+
+    # MISC
+
+    #sign_in_error_alert_loc = (by.LINK_TEXT, 'Invalid email or password.')
+    sign_in_error_alert_loc = (by.CLASS_NAME, 'alert')
 
     def build_elements(self):
 
@@ -64,6 +69,11 @@ class SigninPage:
         self.no_account_link = ''
         self.privacy_policy_link = ''
         self.two_factor_link =''       
+
+        # MISC
+
+        self.sign_in_error_alert = Element(
+            self.driver, self.sign_in_error_alert_loc)
 
     # WORKFLOWS 
 

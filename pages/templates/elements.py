@@ -31,6 +31,12 @@ class Element:
             EC.visibility_of_element_located(self.locator))
         return self.driver.find_element(*self.locator)
 
+    def exists(self):
+
+        try: self.element()
+        except: return False
+        return True
+
 
 
 class Button(Element):
