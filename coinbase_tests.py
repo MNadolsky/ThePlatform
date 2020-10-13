@@ -26,7 +26,7 @@ class Login(unittest.TestCase):
         Acceptance Criteria
         --------------------
         - When a valid username and password combination is submitted through
-          /signin the user is directed to /dashboard and signed in 
+          /signin the user is directed to /dashboard and signed in
         """
 
         page = self.page
@@ -68,7 +68,7 @@ class LoginErrors(unittest.TestCase):
         self.assertEqual(
             page.sign_in_error_alert.element().get_attribute('style'), '')
 
-    def testWrongPassword(self): 
+    def testWrongPassword(self):
 
         page = self.page
 
@@ -91,7 +91,7 @@ class LoginErrors(unittest.TestCase):
         self.assertEqual(
             page.sign_in_error_alert.element().get_attribute('style'), '')
 
-    def testNoPassword(self): 
+    def testNoPassword(self):
 
         page = self.page
 
@@ -127,18 +127,20 @@ class Logout(unittest.TestCase):
           /signin and cannot reach /dashboard without loggin in again
         """
 
-        self.page.avatar_menu.select('Sign out')
+        page = self.page
+
+        page.avatar_menu.select('Sign out')
 
         self.assertEqual \
-            (self.driver.title, 'Coinbase - Buy/Sell Digital Currency')
+            (page.driver.title, 'Coinbase - Buy/Sell Digital Currency')
         self.assertEqual \
-            (self.driver.current_url, config.coinbase_domain + '/signin') 
+            (page.driver.current_url, config.coinbase_domain + '/signin')
 
         self.assertTrue('user cannot', 'reach dashboard')
 
     def tearDown(self):
 
-        self.page.driver.quit() 
+        self.page.driver.quit()
 
 
 
