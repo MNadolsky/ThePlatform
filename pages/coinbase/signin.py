@@ -13,7 +13,6 @@ class SigninPage:
         # sign in page title: Coinbase - Buy/Sell Digital Currency
         if not drivethrough: driver.get(config.coinbase_domain + '/signin')
         if bypass_auth:
-            #driver.delete_all_cookies()
             for cookie in secure.cookies.coinbase: 
                 driver.add_cookie(cookie)
 
@@ -79,7 +78,7 @@ class SigninPage:
 
     # WORKFLOWS 
 
-    def login(self, bypass_auth=True):
+    def login(self, bypass_auth=False):
         """
         The normal user login flow beginning from /signin
 
@@ -102,7 +101,6 @@ class SigninPage:
         """
 
         if bypass_auth:
-            #self.driver.delete_all_cookies()
             for cookie in secure.cookies.coinbase:self.driver.add_cookie(cookie)
 
         self.email_field.input(secure.creds.CBuser)
