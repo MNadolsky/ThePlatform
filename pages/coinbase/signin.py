@@ -8,10 +8,34 @@ from pages.templates.elements import *
 
 class SigninPage:
 
-    def __init__(self, driver, drivethrough=True, bypass_auth=True):
+    def __init__(self, driver, spawn=False, bypass_auth=True):
+        """
+        inputs
+        -----
+        driver = selenium driver
+        spawn: bool
+            The default use case is that a driver that is already at the 
+            appropriate url is passed in as part of a user workflow. if 
+            spawn=True, the driver will be navigated to the appropriate url on 
+            instantiation.
+        bypass_auth: bool
+            Two-factor authentication is manditory. When bypass_auth is true,
+            cookies for the option to bypass are added before login. The cookie
+            file is in /secure and not tracked, so one must be built:
+            1. Log in manually, choosing the option to skip two-factor auth next
+               time
+            2. Log out
+            3. Do driver.get_cookies and print the results (it's a list)
+            4. Make a file in /secure, declare a single variable, and copy and
+               paste the cookie list into the variable
+            5. Delete any newlines in the middle of the dictionary keys/values
+
+            If bypass_auth is False, the login process will require two-factor
+            auth.
+        """
 
         # sign in page title: Coinbase - Buy/Sell Digital Currency
-        if not drivethrough: driver.get(config.coinbase_domain + '/signin')
+        if spawn: driver.get(config.coinbase_domain + '/signin')
         if bypass_auth:
             for cookie in secure.cookies.coinbase: 
                 driver.add_cookie(cookie)
@@ -81,23 +105,10 @@ class SigninPage:
     def login(self, bypass_auth=False):
         """
         The normal user login flow beginning from /signin
-
         inputs
         -----
         bypass_auth: bool
-            Two-factor authentication is manditory. When bypass_auth is true,
-            cookies for the option to bypass are added before login. The cookie
-            file is in /secure and not tracked, so one must be built:
-            1. Log in manually, choosing the option to skip two-factor auth next
-               time
-            2. Log out
-            3. Do driver.get_cookies and print the results (it's a list)
-            4. Make a file in /secure, declare a single variable, and copy and
-               paste the cookie list into the variable
-            5. Delete any newlines in the middle of the dictionary keys/values
-
-            If bypass_auth is False, the login process will require two-factor
-            auth.
+            See __init__() docstring
         """
 
         if bypass_auth:

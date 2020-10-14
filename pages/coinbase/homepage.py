@@ -6,7 +6,16 @@ from pages.templates.elements import *
 
 class HomePage:
 
-    def __init__(self, driver):
+    def __init__(self, driver, spawn=True):
+        """
+        inputs
+        -----
+        driver = selenium driver
+        spawn: bool
+            The default use case is that the driver being passed in is new and 
+            needs to be navigated to the homepage. if spawn=False, it is assumed
+            that the driver passed in is already at the homepage.
+        """
 
         driver.get(config.coinbase_domain)
         self.driver = driver
