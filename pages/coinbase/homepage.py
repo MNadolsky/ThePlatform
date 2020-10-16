@@ -1,17 +1,25 @@
 
 import config
 from pages.templates.elements import *
-
+from selenium.common.exceptions import NoSuchElementException
+import time
 
 
 class HomePage:
 
-    def __init__(self, driver):
+    def __init__(self, driver, dismissCookies=True):
 
         driver.get(config.coinbase_domain)
-        self.driver = driver
+        cookie_dismiss_button = DialogueBox(driver,self.cookie_dismiss_button_loc,self.visible_dialogue_box_loc)        
+        if dismissCookies: cookie_dismiss_button.click()
 
+        self.driver = driver
         self.build_elements()
+
+    # A dismiss cookie dialogue box appears and hides elements, clicking
+    # the dismiss button performed in the init method fixes this issue  
+    visible_dialogue_box_loc =  (by.XPATH, "//div[@class='sc-fzoLsD gkNzOD']")
+    cookie_dismiss_button_loc = (by.XPATH, "//button[.='Dismiss']")
 
     # NAVIGATION BAR
 
@@ -64,29 +72,31 @@ class HomePage:
     # MOBIL APPS
     
     android_app_link_loc =          (by.XPATH, "//a[contains(@href,'android')]")#='Android']")
-    #ios_app_link_loc =              (by.XPATH, "//a[.='iOS']")
+    ios_app_link_loc =              (by.XPATH, "//a[.='iOS']")
 
     # COINBASE SECURITY/INSURANCE
-    '''
-    security_link_loc =
-    insurance_link_loc =
-    best_practices_link_loc =
+
+    security_link_loc =             (by.XPATH,"//a[contains(@title,'funds') or contains(@title,'secure')]") #either funds or secure works' alone, I feel doing this increases longengevity
+    insurance_link_loc =            (by.XPATH,"//a[contains(@title,'insurance') or contains(@title,'policy')]")     #same as above
+    best_practices_link_loc =       (by.XPATH,"//a[contains(@title,'industry') or contains(@title,'practices')]")   #at first I thought I'd use an and instead of an or in case another title is created with just one of these words in it.
 
     # LANGUAGE MENU FOOTER
 
-    language_menu_loc = 
+    language_menu_loc =             (by.XPATH,"//select[contains(@class,'Language')]")
 
     # PRODUCTS FOOTER
 
-    coinbase_link_loc =
-    commerce_link_loc =
-    custody_link_loc =
-    earn_link_loc =
-    pro_link_loc =
-    usd_coin_link_loc =
+    coinbase_link_loc =             (by.XPATH, "//a[.='Coinbase']")
+    commerce_link_loc =             (by.XPATH, "//a[.='Commerce']")
+    custody_link_loc =              (by.XPATH, "//a[.='Custody']")
+    earn_link_loc =                 (by.XPATH, "//a[.='Earn']")
+    pro_link_loc =                  (by.XPATH, "//a[.='Pro']")
+    usd_coin_link_loc =             (by.XPATH, "//a[.='USD Coin']")
+    wallet_link_loc =               (by.XPATH, "//a[.='Wallet']")
+    ventures_link_loc =             (by.XPATH, "//a[.='Ventures']")
     
     # LEARN FOOTER
-
+    '''
     browse_assets_link_loc =
     crypto_info_link_loc =
     bitcoin_info_link_loc =
@@ -119,6 +129,8 @@ class HomePage:
 
 
     def build_elements(self):
+
+        #self.cookie_button = DialogueBox(self.driver,self.cookie_dismiss_button_loc)
 
         # NAVIGATION BAR
 
@@ -170,11 +182,11 @@ class HomePage:
         # MOBIL APPS
 
         self.android_app_link =         Link(self.driver,self.android_app_link_loc)
-        #self.ios_app_link =             Link(self.driver,self.ios_app_link_loc)
-        '''
+        self.ios_app_link =             Link(self.driver,self.ios_app_link_loc)
+
         # COINBASE SECURITY/INSURANCE
 
-        self.ios_app_link =             Link(self.driver,self.ios_app_link_loc)
+        self.security_link =             Link(self.driver,self.security_link_loc)
         self.insurance_link =           Link(self.driver,self.insurance_link_loc)
         self.best_practices_link =      Link(self.driver,self.best_practices_link_loc)
 
@@ -190,9 +202,11 @@ class HomePage:
         self.earn_link =                Link(self.driver,self.earn_link_loc)
         self.pro_link =                 Link(self.driver,self.pro_link_loc)
         self.usd_coin_link =            Link(self.driver,self.usd_coin_link_loc)
-        
-        # LEARN FOOTER
+        self.wallet_link_loc =          Link(self.driver,self.wallet_link_loc)
+        self.ventures_link_loc =        Link(self.driver,self.ventures_link_loc)
 
+        # LEARN FOOTER
+        '''
         self.browse_assets_link =       Link(self.driver,self.browse_assets_link_loc)
         self.crypto_info_link =         Link(self.driver,self.crypto_info_link_loc)
         self.bitcoin_info_link =        Link(self.driver,self.bitcoin_info_link_loc)

@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By as by
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
 
+import time
 import sys
 
 
@@ -79,6 +80,30 @@ class Field(Element):
     def click(self): self.element().click()
     def input(self, keys): self.element().send_keys(keys)
     def clear(self): self.element().clear()
+
+
+class DialogueBox(Element):
+    """
+    Inputs:
+    -----
+    visible_element: selenium locator
+              A dialogue box is at first invisible and can take time to appear.
+              So a wait for visibility is needed on a visible element. Where 
+              the desired element to be clicked may not be visible immediately.
+    """
+
+    def __init__(self, driver, locator, visible_element=None):
+
+        super().__init__(driver, locator)
+        self.wait_locator = visible_element
+
+    def click(self):
+
+        if self.wait_locator != None: 
+            wait(self.driver,10).until(EC.visibility_of_element_located(self.wait_locator))
+
+        wait(self.driver,10).until(EC.element_to_be_clickable(self.locator))
+        self.element().click()
 
 
 
