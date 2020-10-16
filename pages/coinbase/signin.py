@@ -9,12 +9,12 @@ from pages.templates.elements import *
 class SigninPage:
 
     def __init__(self, driver, drivethrough=True, bypass_auth=True):
-
+        
         # sign in page title: Coinbase - Buy/Sell Digital Currency
-        if not drivethrough: driver.get(config.coinbase_domain + '/signin')
+        if drivethrough: driver.get(config.coinbase_domain + '/signin')     #did you throw in that not to trip me up?
         if bypass_auth:
             #driver.delete_all_cookies()
-            for cookie in secure.cookies.coinbase: 
+            for cookie in secure.cookies.coinbase:
                 driver.add_cookie(cookie)
 
         self.driver = driver
@@ -53,7 +53,7 @@ class SigninPage:
         # NAVIGATION BAR
 
         self.home_link =      Link(self.driver, self.home_link_loc)
-        self.products_menu =  ReactiveMenu(self.driver, self.products_menu_loc)
+        self.products_menu =  ReactiveMenu(self.driver, self.products_menu_loc) #needs a driver.maximize_window() before instantiation to successfully implement this object and the remaining objects in the navigation bar
         self.help_link =      Link(self.driver, self.help_link_loc)
         self.prices_link =    Link(self.driver, self.prices_link_loc)
         self.sign_in_link =   Link(self.driver, self.sign_in_link_loc)
@@ -63,12 +63,12 @@ class SigninPage:
 
         self.email_field =          Field(self.driver, self.email_field_loc)
         self.pass_field =           Field(self.driver, self.pass_field_loc)
-        self.stay_signed_in_checkbox = ''
+        self.stay_signed_in_checkbox = CheckBox(self.driver, self.stay_signed_in_checkbox_loc)
         self.sign_in_button =       Button(self.driver, self.sign_in_button_loc)
-        self.forgot_password_link = ''
-        self.no_account_link = ''
-        self.privacy_policy_link = ''
-        self.two_factor_link =''       
+        self.forgot_password_link = Link(self.driver, self.forgot_password_link_loc)
+        self.no_account_link =      Link(self.driver,self.no_account_link_loc)
+        self.privacy_policy_link = Link(self.driver,self.privacy_policy_link_loc)
+        self.two_factor_link =      Link(self.driver,self.two_factor_link_loc)       
 
         # MISC
 
@@ -85,7 +85,7 @@ class SigninPage:
 
         inputs
         -----
-        bypass_auth: bool
+        bypass_auth: bool       #Should this docString be near the __init__ method? since bypas_auth is first given there
             Two-factor authentication is manditory. When bypass_auth is true,
             cookies for the option to bypass are added before login. The cookie
             file is in /secure and not tracked, so one must be built:
@@ -93,14 +93,14 @@ class SigninPage:
                time
             2. Log out
             3. Do driver.get_cookies and print the results (it's a list)
-            4. Make a file in /secure, declare a single variable, and copy and
-               paste the cookie list into the variable
+            4. Make a file called cookies in /secure, declare a single variable
+               called coinbase, and copy and paste the cookie list into the variable
             5. Delete any newlines in the middle of the dictionary keys/values
 
             If bypass_auth is False, the login process will require two-factor
             auth.
         """
-
+        #I don't understand why loading the cookies is in this method, when the SigninPage object is instantiated this will already be done, is this to give the option to instantiate signin without loading cookies but to login with it.
         if bypass_auth:
             #self.driver.delete_all_cookies()
             for cookie in secure.cookies.coinbase:self.driver.add_cookie(cookie)

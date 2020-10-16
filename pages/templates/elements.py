@@ -64,6 +64,24 @@ class Button(Element):
             EC.visibility_of_element_located(self.wait_locator))
 
 
+class CheckBox(Element):
+
+    def click(self):
+    
+        wait(self.driver,10).until(EC.element_to_be_clickable(self.locator))
+        self.element().click()
+
+    #to determine if a checkbox is Checked; if checked returns True is not checked returns False
+    def isChecked(self):
+
+        wait(self.driver,10).until(EC.visibility_of_element_located(self.locator))
+        return self.driver.find_element(*self.locator).is_selected()
+
+    def alwaysSelectBox(self):
+
+        wait(self.driver,10).until(EC.visibility_of_element_located(self.locator))
+        if self.isChecked(): pass
+        else: self.element().click()
 
 class Link(Element):
 
@@ -153,10 +171,10 @@ class ReactiveMenu(Element):
             item_loc = (by.XPATH, f"//*[.='{item_selector}']")
             item = self.driver.find_element(*item_loc)
 
-        if item.tag_name is not 'a': 
+        if item.tag_name != 'a': 
 
             parent = item.find_element_by_xpath('..')            
-            if parent is 'a': item = parent
+            if parent == 'a': item = parent
 
         item.click()
 
