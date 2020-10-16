@@ -185,17 +185,3 @@ class ReactiveMenu(Element):
 
         item.click()
 
-
-            
-
-
-
-
-
-
-
-
-
-
-
-

@@ -18,18 +18,18 @@ class HomePage:
 
     # A dismiss cookie dialogue box appears and hides elements, clicking
     # the dismiss button performed in the init method fixes this issue  
-    visible_dialogue_box_loc =  (by.XPATH, "//div[@class='sc-fzoLsD gkNzOD']")
-    cookie_dismiss_button_loc = (by.XPATH, "//button[.='Dismiss']")
+    visible_dialogue_box_loc =      (by.XPATH, "//div[@class='sc-fzoLsD gkNzOD']")
+    cookie_dismiss_button_loc =     (by.XPATH, "//button[.='Dismiss']")
 
     # NAVIGATION BAR
 
-    home_link_loc =         (by.XPATH, "//a[@title='Home']")
-    prices_link_loc =       (by.XPATH, "//a[@title='Prices']")
-    products_menu_loc =     (by.XPATH, "//button[contains(text(),'Products')]")
-    company_menu_loc =      (by.XPATH, "//button[contains(text(),'Company')]")
-    earn_crypto_link_loc =  (by.XPATH, "//a[@title='Earn crypto']")
-    sign_in_link_loc =      (by.XPATH, "//a[@title='Sign in']")
-    header_get_started_button_loc =(by.XPATH, "//a[.='Get started']")
+    home_link_loc =                 (by.XPATH, "//a[@title='Home']")
+    prices_link_loc =               (by.XPATH, "//a[@title='Prices']")
+    products_menu_loc =             (by.XPATH, "//button[contains(text(),'Products')]")
+    company_menu_loc =              (by.XPATH, "//button[contains(text(),'Company')]")
+    earn_crypto_link_loc =          (by.XPATH, "//a[@title='Earn crypto']")
+    sign_in_link_loc =              (by.XPATH, "//a[@title='Sign in']")
+    header_get_started_button_loc = (by.XPATH, "//a[.='Get started']")
 
          
     # CREATE ACCOUNT
@@ -71,8 +71,8 @@ class HomePage:
 
     # MOBIL APPS
     
-    android_app_link_loc =          (by.XPATH, "//a[contains(@href,'android')]")#='Android']")
-    ios_app_link_loc =              (by.XPATH, "//a[.='iOS']")
+    android_app_link_loc =           (by.XPATH, "//a[contains(@href,'android')]")#='Android']")
+    ios_app_link_loc =               (by.XPATH, "//a[.='iOS']")
 
     # COINBASE SECURITY/INSURANCE
 
@@ -86,7 +86,7 @@ class HomePage:
 
     # PRODUCTS FOOTER
 
-    coinbase_link_loc =             (by.XPATH, "//a[.='Coinbase']")
+    coinbase_link_loc =             (by.XPATH, "//a[.='Coinbase']")     #from here down I feel like maybe this is an easy/lazy way to finish the homepage
     commerce_link_loc =             (by.XPATH, "//a[.='Commerce']")
     custody_link_loc =              (by.XPATH, "//a[.='Custody']")
     earn_link_loc =                 (by.XPATH, "//a[.='Earn']")
@@ -96,36 +96,36 @@ class HomePage:
     ventures_link_loc =             (by.XPATH, "//a[.='Ventures']")
     
     # LEARN FOOTER
-    '''
-    browse_assets_link_loc =
-    crypto_info_link_loc =
-    bitcoin_info_link_loc =
-    blockchain_info_link_loc =
-    bitcoin_buy_link_loc =
-    bitcoinCash_buy_link_loc =
-    ethereum_buy_link_loc =
-    litecoin_buy_link_loc =
-    XRP_buy_link_loc =
-    supported_countries_link_loc =
-    status_link_loc =
-    taxes_link_loc =
+
+    browse_assets_link_loc =        (by.XPATH, "//a[.='Browse assets']")
+    crypto_info_link_loc =          (by.XPATH, "//a[.='What is Crypto?']")
+    bitcoin_info_link_loc =         (by.XPATH, "//a[.='What is Bitcoin?']")
+    blockchain_info_link_loc =      (by.XPATH, "//a[.='What is Blockchain?']")
+    bitcoin_buy_link_loc =          (by.XPATH, "//a[.='Buy Bitcoin']")
+    bitcoinCash_buy_link_loc =      (by.XPATH, "//a[.='Buy Bitcoin Cash']")
+    ethereum_buy_link_loc =         (by.XPATH, "//a[.='Buy Ethereum']")
+    litecoin_buy_link_loc =         (by.XPATH, "//a[.='Buy Litecoin']")
+    XRP_buy_link_loc =              (by.XPATH, "//a[.='Buy XRP']")
+    supported_countries_link_loc =  (by.XPATH, "//a[.='Supported countries']")
+    status_link_loc =               (by.XPATH, "//a[.='Status']")
+    taxes_link_loc =                (by.XPATH, "//a[.='Taxes']")
 
     # COMPANY FOOTER
 
-    about_link_loc =
-    affiliates_link_loc =
-    careers_link_loc =
-    partners_link_loc =
-    press_link_loc =
-    legal_and_privacy_link_loc =
-    cookie_policy_link_loc =
-    support_link_loc =
+    about_link_loc =                (by.XPATH, "//a[.='About']")
+    affiliates_link_loc =           (by.XPATH, "//a[.='Affiliates']")
+    careers_link_loc =              (by.XPATH, "//a[.='Careers']")
+    partners_link_loc =             (by.XPATH, "//a[.='Partners']")
+    press_link_loc =                (by.XPATH, "//a[.='Press']")
+    legal_and_privacy_link_loc =    (by.XPATH, "//a[.='Legal & Privacy']")
+    cookie_policy_link_loc =        (by.XPATH, "//a[.='Cookie Policy']")
+    support_link_loc =              (by.XPATH, "//a[.='Support']")
 
     # SOCIAL FOOTER
 
-    blog_link_loc =
-    twitter_link_loc =
-    facebook_link_loc = '''
+    blog_link_loc =                 (by.XPATH, "//a[.='Blog']")
+    twitter_link_loc =              (by.XPATH, "//a[.='Twitter']")
+    facebook_link_loc =             (by.XPATH, "//a[.='Facebook']")
 
 
     def build_elements(self):
@@ -134,18 +134,18 @@ class HomePage:
 
         # NAVIGATION BAR
 
-        self.home_link =        Link(self.driver, self.home_link_loc)
-        self.prices_link =      Link(self.driver, self.prices_link_loc)
-        self.products_menu =    ReactiveMenu(self.driver,self.products_menu_loc)
-        self.company_menu =     ReactiveMenu(self.driver, self.company_menu_loc)
-        self.earn_crypto_link = Link(self.driver, self.earn_crypto_link_loc)
-        self.sign_in_link =     Link(self.driver, self.sign_in_link_loc)
+        self.home_link =                 Link(self.driver, self.home_link_loc)
+        self.prices_link =               Link(self.driver, self.prices_link_loc)
+        self.products_menu =             ReactiveMenu(self.driver,self.products_menu_loc)
+        self.company_menu =              ReactiveMenu(self.driver, self.company_menu_loc)
+        self.earn_crypto_link =          Link(self.driver, self.earn_crypto_link_loc)
+        self.sign_in_link =              Link(self.driver, self.sign_in_link_loc)
         self.header_get_started_button = Button(self.driver, self.header_get_started_button_loc)
 
         # CREATE ACCOUNT
 
         self.get_started_email_field =   Field(self.driver,self.get_started_email_field_loc)
-        self.get_started_button =    Button(self.driver,self.get_started_button_loc)
+        self.get_started_button =        Button(self.driver,self.get_started_button_loc)
 
         # CRYPTO CURRENCY MENU
   
@@ -171,13 +171,13 @@ class HomePage:
 
         # EARNING LINKS BLCOK
 
-        self.start_earning_button =             Button(self.driver,self.start_earning_button_loc)
-        self.start_earning_lower_button =       Button(self.driver,self.start_earning_lower_button_loc)
-        self.maker_link =                       Link(self.driver,self.maker_link_loc)
-        self.celo_link =                        Link(self.driver,self.celo_link_loc)
-        self.compound_link =                    Link(self.driver,self.compound_link_loc)
-        self.EOS_link =                         Link(self.driver,self.EOS_link_loc)
-        self.view_more_link =                   Link(self.driver,self.view_more_link_loc)
+        self.start_earning_button =         Button(self.driver,self.start_earning_button_loc)
+        self.start_earning_lower_button =   Button(self.driver,self.start_earning_lower_button_loc)
+        self.maker_link =                   Link(self.driver,self.maker_link_loc)
+        self.celo_link =                    Link(self.driver,self.celo_link_loc)
+        self.compound_link =                Link(self.driver,self.compound_link_loc)
+        self.EOS_link =                     Link(self.driver,self.EOS_link_loc)
+        self.view_more_link =               Link(self.driver,self.view_more_link_loc)
 
         # MOBIL APPS
 
@@ -186,7 +186,7 @@ class HomePage:
 
         # COINBASE SECURITY/INSURANCE
 
-        self.security_link =             Link(self.driver,self.security_link_loc)
+        self.security_link =            Link(self.driver,self.security_link_loc)
         self.insurance_link =           Link(self.driver,self.insurance_link_loc)
         self.best_practices_link =      Link(self.driver,self.best_practices_link_loc)
 
@@ -202,11 +202,11 @@ class HomePage:
         self.earn_link =                Link(self.driver,self.earn_link_loc)
         self.pro_link =                 Link(self.driver,self.pro_link_loc)
         self.usd_coin_link =            Link(self.driver,self.usd_coin_link_loc)
-        self.wallet_link_loc =          Link(self.driver,self.wallet_link_loc)
-        self.ventures_link_loc =        Link(self.driver,self.ventures_link_loc)
+        self.wallet_link =              Link(self.driver,self.wallet_link_loc)
+        self.ventures_link =            Link(self.driver,self.ventures_link_loc)
 
         # LEARN FOOTER
-        '''
+
         self.browse_assets_link =       Link(self.driver,self.browse_assets_link_loc)
         self.crypto_info_link =         Link(self.driver,self.crypto_info_link_loc)
         self.bitcoin_info_link =        Link(self.driver,self.bitcoin_info_link_loc)
@@ -235,4 +235,5 @@ class HomePage:
 
         self.blog_link =                Link(self.driver,self.blog_link_loc)
         self.twitter_link =             Link(self.driver,self.twitter_link_loc)
-        self.facebook_link =            Link(self.driver,self.facebook_link_loc)'''
+        self.facebook_link =            Link(self.driver,self.facebook_link_loc)
+        
