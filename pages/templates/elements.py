@@ -6,6 +6,9 @@ from selenium.webdriver.support import expected_conditions as EC
 
 import sys
 
+import pages.destinations
+
+
 
 class Element:
     """
@@ -67,10 +70,16 @@ class Button(Element):
 
 class Link(Element):
 
+    def __init__(self, driver, locator, destination=None):
+
+        super().__init__(driver, locator)
+        self.destination = destination
+
     def click(self):
 
         wait(self.driver,10).until(EC.element_to_be_clickable(self.locator))
         self.element().click()
+        return pages.destinations.get_page(self.driver, self.destination)
 
 
 
