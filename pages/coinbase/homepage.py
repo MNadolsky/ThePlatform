@@ -2,7 +2,6 @@
 import config
 from pages.templates.elements import *
 from selenium.common.exceptions import NoSuchElementException
-import time
 
 
 class HomePage:
@@ -236,4 +235,3 @@ class HomePage:
         self.blog_link =                Link(self.driver,self.blog_link_loc)
         self.twitter_link =             Link(self.driver,self.twitter_link_loc)
         self.facebook_link =            Link(self.driver,self.facebook_link_loc)
-        
