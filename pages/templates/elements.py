@@ -54,10 +54,11 @@ class Button(Element):
               exit.
     """
 
-    def __init__(self, driver, locator, wait_for=None):
+    def __init__(self, driver, locator, wait_for=None, destination=None):
 
         super().__init__(driver, locator)
         self.wait_locator = wait_for
+        self.destination = destination
 
     def click(self):
 
@@ -65,6 +66,9 @@ class Button(Element):
         self.element().click()
         if self.wait_locator: wait(self.driver,10).until(
             EC.visibility_of_element_located(self.wait_locator))
+
+        if self.destination:
+            return pages.destinations.get_page(self.driver, self.destination)
 
 
 
@@ -79,7 +83,9 @@ class Link(Element):
 
         wait(self.driver,10).until(EC.element_to_be_clickable(self.locator))
         self.element().click()
-        return pages.destinations.get_page(self.driver, self.destination)
+
+        if self.destination:
+            return pages.destinations.get_page(self.driver, self.destination)
 
 
 

@@ -36,14 +36,16 @@ class DashboardPage:
 
         # NAVIGATION BAR
 
-        self.logo_link =         Link(self.driver, self.logo_link_loc)
-        self.home_link =         Link(self.driver, self.home_link_loc)
-        self.portfolio_link =    Link(self.driver, self.portfolio_link_loc)
-        self.prices_link =       Link(self.driver, self.prices_link_loc)
+        self.logo_link = Link(
+            self.driver, self.logo_link_loc, destination='dashboard')
+        self.home_link = Link(
+            self.driver, self.home_link_loc, destination='dashboard')
+        self.portfolio_link = Link(self.driver, self.portfolio_link_loc)
+        self.prices_link = Link(self.driver, self.prices_link_loc)
         self.earn_rewards_link = Link(self.driver, self.earn_rewards_link_loc)
-        self.trade_button =      Button(self.driver, self.trade_button_loc)
-        self.send_button =       Button(self.driver, self.send_button_loc)
-        self.receive_button =    Button(self.driver, self.receive_button_loc)
+        self.trade_button = Button(self.driver, self.trade_button_loc)
+        self.send_button = Button(self.driver, self.send_button_loc)
+        self.receive_button = Button(self.driver, self.receive_button_loc)
         self.notifications_menu = ReactiveMenu(
             self.driver, self.notifications_menu_loc, 
             self.notifications_menu_wrapper_loc)
@@ -57,7 +59,7 @@ class DashboardPage:
         Normal user logout flow
         """
         self.avatar_menu.select('Sign out')
-
+        
 
 
 
