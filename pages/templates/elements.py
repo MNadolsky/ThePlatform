@@ -52,6 +52,8 @@ class Button(Element):
               with the next line before the "click" is finished. wait_for
               specifies an element that must be visible before the click() will
               exit.
+    destination: string
+                 For use, see pages.destinations documentation
     """
 
     def __init__(self, driver, locator, wait_for=None, destination=None):
@@ -73,7 +75,12 @@ class Button(Element):
 
 
 class Link(Element):
-
+"""
+    Inputs:
+    -----
+    destination: string
+                 For use, see pages.destinations documentation
+"""
     def __init__(self, driver, locator, destination=None):
 
         super().__init__(driver, locator)
