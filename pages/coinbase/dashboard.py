@@ -45,6 +45,11 @@ class DashboardPage:
     avatar_menu_wrapper_loc = (
         by.XPATH, "//div[contains(@class,'DropdownMenu__Wrapper')]")
 
+    settings_item_loc = (by.LINK_TEXT, 'Settings')
+    taxes_and_reports_item_loc = (by.LINK_TEXT, 'Taxes & Reports')
+    help_item_loc = (by.LINK_TEXT, 'Help')
+    sign_out_item_loc = (by.LINK_TEXT, 'Sign out')
+
     def build_elements(self):
 
         # NAVIGATION BAR
@@ -65,13 +70,25 @@ class DashboardPage:
         self.avatar_menu = ReactiveMenu(
             self.driver, self.avatar_menu_loc, self.avatar_menu_wrapper_loc)
 
+        self.settings_item = Link(self.driver, self.settings_item_loc)
+        self.taxes_and_reports_item = Link(
+            self.driver, self.taxes_and_reports_item_loc)
+        self.help_item = Link(self.driver, self.help_item_loc)
+        self.sign_out_item = Link(
+            self.driver, self.sign_out_item_loc, destination='signin')
+
+        
+
     # WORKFLOWS
 
     def logout(self):
         """
         Normal user logout flow
         """
-        self.avatar_menu.select('Sign out')
+        self.avatar_menu.open()
+        signin_page = self.sign_out_item.click()
+
+        return signin_page
         
 
 
