@@ -110,7 +110,9 @@ class SigninPage:
 
         self.email_field.input(secure.creds.CBuser)
         self.pass_field.input(secure.creds.CBpass)
-        self.sign_in_button.click()
+        dashboard_page = self.sign_in_button.click()
+
+        return dashboard_page
         
 
 

@@ -8,7 +8,20 @@ class DashboardPage:
 
     def __init__(self, driver, drivethrough=True):
 
-        if not drivethrough: driver.get(config.coinbase_domain + '/dashboard')
+        if not drivethrough: 
+
+            driver.get(config.coinbase_domain + '/dashboard')
+            # handle redirect
+            try: wait(driver,2).until(EC.url_contains('/signin'))
+            except: pass
+
+            if config.coinbase_domain + '/signin' in driver.current_url:
+                # When pages reference other pages it is often circular, so the
+                # import is done here to limit the defect potential
+                from pages.coinbase.signin import SigninPage
+                page = SigninPage(driver)
+                page.login()
+
         self.driver = driver
 
         self.build_elements()
