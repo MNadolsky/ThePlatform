@@ -6,9 +6,19 @@ from pages.templates.elements import *
 
 class DashboardPage:
 
-    def __init__(self, driver, drivethrough=True):
+    def __init__(self, driver, spawn=False):
+        """
+        inputs
+        -----
+        driver = selenium driver
+        spawn: bool
+            The default use case is that a driver that is already at the 
+            appropriate url is passed in as part of a user workflow. if 
+            spawn=True, the driver will be navigated to the appropriate url on 
+            instantiation.
+        """
 
-        if not drivethrough: 
+        if spawn: 
 
             driver.get(config.coinbase_domain + '/dashboard')
             # handle redirect

@@ -75,12 +75,12 @@ class Button(Element):
 
 
 class Link(Element):
-"""
+    """
     Inputs:
     -----
     destination: string
                  For use, see pages.destinations documentation
-"""
+    """
     def __init__(self, driver, locator, destination=None):
 
         super().__init__(driver, locator)
