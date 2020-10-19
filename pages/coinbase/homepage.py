@@ -37,12 +37,14 @@ class HomePage:
 
         # NAVIGATION BAR
 
-        self.home_link =        Link(self.driver, self.home_link_loc)
-        self.prices_link =      Link(self.driver, self.prices_link_loc)
-        self.products_menu =    ReactiveMenu(self.driver,self.products_menu_loc)
-        self.company_menu =     ReactiveMenu(self.driver, self.company_menu_loc)
+        self.home_link = Link(
+            self.driver, self.home_link_loc, destination='home')
+        self.prices_link = Link(self.driver, self.prices_link_loc)
+        self.products_menu = ReactiveMenu(self.driver,self.products_menu_loc)
+        self.company_menu = ReactiveMenu(self.driver, self.company_menu_loc)
         self.earn_crypto_link = Link(self.driver, self.earn_crypto_link_loc)
-        self.sign_in_link =     Link(self.driver, self.sign_in_link_loc)
+        self.sign_in_link = Link(
+            self.driver, self.sign_in_link_loc, destination='signin')
         self.header_get_started_button = Button(
             self.driver, self.header_get_started_button_loc)
 

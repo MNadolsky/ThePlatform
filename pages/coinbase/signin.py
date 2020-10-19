@@ -68,19 +68,22 @@ class SigninPage:
 
         # NAVIGATION BAR
 
-        self.home_link =      Link(self.driver, self.home_link_loc)
+        self.home_link =      Link(
+            self.driver, self.home_link_loc, destination='home')
         self.products_menu =  ReactiveMenu(self.driver, self.products_menu_loc)
         self.help_link =      Link(self.driver, self.help_link_loc)
         self.prices_link =    Link(self.driver, self.prices_link_loc)
-        self.sign_in_link =   Link(self.driver, self.sign_in_link_loc)
+        self.sign_in_link =   Link(
+            self.driver, self.sign_in_link_loc, destination='signin')
         self.sign_up_button = Button(self.driver, self.sign_up_button_loc)
         
         # BODY
 
-        self.email_field =          Field(self.driver, self.email_field_loc)
-        self.pass_field =           Field(self.driver, self.pass_field_loc)
+        self.email_field = Field(self.driver, self.email_field_loc)
+        self.pass_field = Field(self.driver, self.pass_field_loc)
         self.stay_signed_in_checkbox = ''
-        self.sign_in_button =       Button(self.driver, self.sign_in_button_loc)
+        self.sign_in_button = Button(
+            self.driver, self.sign_in_button_loc, destination='dashboard')
         self.forgot_password_link = ''
         self.no_account_link = ''
         self.privacy_policy_link = ''
@@ -109,7 +112,9 @@ class SigninPage:
 
         self.email_field.input(secure.creds.CBuser)
         self.pass_field.input(secure.creds.CBpass)
-        self.sign_in_button.click()
+        dashboard_page = self.sign_in_button.click()
+
+        return dashboard_page
         
 
 
