@@ -21,15 +21,8 @@ class SigninPage:
         bypass_auth: bool
             Two-factor authentication is manditory. When bypass_auth is true,
             cookies for the option to bypass are added before login. The cookie
-            file is in /secure and not tracked, so one must be built:
-            1. Log in manually, choosing the option to skip two-factor auth next
-               time
-            2. Log out
-            3. Do driver.get_cookies and print the results (it's a list)
-            4. Make a file in /secure, declare a single variable, and copy and
-               paste the cookie list into the variable
-            5. Delete any newlines in the middle of the dictionary keys/values
-
+            file is in /secure and not tracked, so one must be built according
+            to README.md.
             If bypass_auth is False, the login process will require two-factor
             auth.
         """
