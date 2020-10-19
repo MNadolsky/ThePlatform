@@ -17,7 +17,7 @@ class Login(unittest.TestCase):
     def setUp(self):
 
         driver = webdriver.Chrome(config.chromedriver_path)
-        self.page = SigninPage(driver, drivethrough=False)
+        self.page = SigninPage(driver, spawn=True)
 
     def runTest(self):
         """
@@ -54,7 +54,7 @@ class LoginErrors(unittest.TestCase):
     def setUp(self):
 
         driver = webdriver.Chrome(config.chromedriver_path)
-        self.page = SigninPage(driver, drivethrough=False, bypass_auth=False)
+        self.page = SigninPage(driver, spawn=True, bypass_auth=False)
 
     def testWrongUsername(self):
 
@@ -114,7 +114,7 @@ class Logout(unittest.TestCase):
     def setUp(self):
 
         driver = webdriver.Chrome(config.chromedriver_path)
-        page = SigninPage(driver, drivethrough=False)
+        page = SigninPage(driver, spawn=True)
         page.login()
         self.page = DashboardPage(driver)
 
