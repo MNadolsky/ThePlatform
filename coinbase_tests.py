@@ -1,5 +1,7 @@
 
 import unittest
+import platform
+import os
 import time
 
 from selenium import webdriver
@@ -12,11 +14,17 @@ from pages.coinbase.dashboard import DashboardPage
 
 
 
+root_path = os.path.dirname(os.path.realpath(__file__))
+if 'Darwin' in platform.system():
+    chromedriver_path = config.mac_chromedriver_path
+else: 
+    chromedriver_path = config.win_chromedriver_path
+
 class Login(unittest.TestCase):
 
     def setUp(self):
 
-        driver = webdriver.Chrome(config.chromedriver_path)
+        driver = webdriver.Chrome(root_path + chromedriver_path)
         self.page = SigninPage(driver, spawn=True)
 
     def runTest(self):
@@ -53,7 +61,7 @@ class LoginErrors(unittest.TestCase):
 
     def setUp(self):
 
-        driver = webdriver.Chrome(config.chromedriver_path)
+        driver = webdriver.Chrome(root_path + chromedriver_path)
         self.page = SigninPage(driver, spawn=True, bypass_auth=False)
 
     def testWrongUsername(self):
@@ -113,7 +121,7 @@ class Logout(unittest.TestCase):
 
     def setUp(self):
 
-        driver = webdriver.Chrome(config.chromedriver_path)
+        driver = webdriver.Chrome(root_path + chromedriver_path)
         page = SigninPage(driver, spawn=True)
         page.login()
         self.page = DashboardPage(driver)
@@ -132,7 +140,7 @@ class Logout(unittest.TestCase):
         page.avatar_menu.select('Sign out')
 
         self.assertEqual \
-            (page.driver.title, 'Coinbase - Buy/Sell Digital Currency')
+            (page.driver.title, 'Coinbase - Buy/Sell Cryptocurrency')
         self.assertEqual \
             (page.driver.current_url, config.coinbase_domain + '/signin')
 
