@@ -6,19 +6,19 @@ from selenium.common.exceptions import NoSuchElementException
 
 class HomePage:
 
-    def __init__(self, driver, dismissCookies=True):
+    def __init__(self, driver, close_cookie_banner=True):
 
         driver.get(config.coinbase_domain)
-        cookie_dismiss_button = DialogueBox(driver,self.cookie_dismiss_button_loc,self.visible_dialogue_box_loc)        
-        if dismissCookies: cookie_dismiss_button.click()
+        cookie_banner_dismiss_button =  DialogueBox(driver,self.cookie_banner_dismiss_button_loc,self.visible_cookie_banner_loc)
+        if close_cookie_banner: cookie_banner_dismiss_button.click()
 
         self.driver = driver
         self.build_elements()
 
     # A dismiss cookie dialogue box appears and hides elements, clicking
     # the dismiss button performed in the init method fixes this issue  
-    visible_dialogue_box_loc =      (by.XPATH, "//div[@class='sc-fzoLsD gkNzOD']")
-    cookie_dismiss_button_loc =     (by.XPATH, "//button[.='Dismiss']")
+    visible_cookie_banner_loc =      (by.XPATH, "//div[@class='sc-fzoLsD gkNzOD']")
+    cookie_banner_dismiss_button_loc =     (by.XPATH, "//button[.='Dismiss']")
 
     # NAVIGATION BAR
 
@@ -62,22 +62,22 @@ class HomePage:
 
     start_earning_button_loc =       (by.XPATH, "//button[contains(@class,'EarnUpsellBanner')]")
     start_earning_lower_button_loc = (by.XPATH, "//button[contains(@class,'EarnFooterBanner')]")
-    maker_link_loc =                 (by.XPATH, "//a[@href='/earn/maker']/div")
-    celo_link_loc =                  (by.XPATH, "//a[@href='/earn/celo']/div/div/h2")   #I don't love this xpath, but I feel it is the best way to locate this element
-    compound_link_loc =              (by.XPATH, "//a[@href='/earn/compound']/div/div/h2")   #ditto
-    EOS_link_loc =                   (by.XPATH, "//a[@href='/earn/eos']/div/div/h2")
-    view_more_link_loc =             (by.XPATH, "//a[@href='/earn']/div")
+    maker_link_loc =                 (by.XPATH, "//a[@to='/earn/maker']")
+    celo_link_loc =                  (by.XPATH, "//a[@to='/earn/celo']")  #/div/div/h2")   #I don't love this xpath, but I feel it is the best way to locate this element
+    compound_link_loc =              (by.XPATH, "//a[@to='/earn/compound']")   #ditto
+    EOS_link_loc =                   (by.XPATH, "//a[@to='/earn/eos']")
+    view_more_link_loc =             (by.XPATH, "//a[@to='/earn']")
 
-    # MOBIL APPS
+    # MOBILE APPS
     
     android_app_link_loc =           (by.XPATH, "//a[contains(@href,'android')]")#='Android']")
     ios_app_link_loc =               (by.XPATH, "//a[.='iOS']")
 
     # COINBASE SECURITY/INSURANCE
 
-    security_link_loc =             (by.XPATH,"//a[contains(@title,'funds') or contains(@title,'secure')]") #either funds or secure works' alone, I feel doing this increases longengevity
-    insurance_link_loc =            (by.XPATH,"//a[contains(@title,'insurance') or contains(@title,'policy')]")     #same as above
-    best_practices_link_loc =       (by.XPATH,"//a[contains(@title,'industry') or contains(@title,'practices')]")   #at first I thought I'd use an and instead of an or in case another title is created with just one of these words in it.
+    security_link_loc =             (by.XPATH,"//a[@title='Learn how Coinbase keeps your funds safe and secure']") 
+    insurance_link_loc =            (by.XPATH,"//a[@title='Learn how your crypto is covered by our insurance policy']")   # unfortunately this XPATH didn't work for these three links "//a[.='Learn how your crypto is covered by our insurance policy']"
+    best_practices_link_loc =       (by.XPATH,"//a[@title='Learn how we implement industry best practices for account security']")
 
     # LANGUAGE MENU FOOTER
 
@@ -129,7 +129,9 @@ class HomePage:
 
     def build_elements(self):
 
-        #self.cookie_button = DialogueBox(self.driver,self.cookie_dismiss_button_loc)
+        # COOKIE BANNER
+        
+        #self.cookie_banner_dismiss_button =  DialogueBox(driver,self.cookie_dismiss_button_loc,self.visible_dialogue_box_loc)
 
         # NAVIGATION BAR
 
