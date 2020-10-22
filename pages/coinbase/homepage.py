@@ -10,13 +10,14 @@ class HomePage:
 
         driver.get(config.coinbase_domain)
 
-        self.driver = driver    #this needs to be before the button to be able to load the button duhhh
         self.build_elements()
 
         if close_cookie_banner:
             wait(driver,10).until(EC.visibility_of_element_located(
                 self.visible_cookie_banner_loc))
             self.cookie_banner_dismiss_button.click()
+    
+        self.driver = driver    #this needs to be before the button to be able to load the button duhhh
 
 
     # A dismiss cookie dialogue box appears and hides elements, clicking
@@ -86,7 +87,8 @@ class HomePage:
     secure_storage_link_loc =       (by.XPATH,
         "//a[@title='Learn how Coinbase keeps your funds safe and secure']")     
     protected_insurance_link_loc =      (by.XPATH,
-        "//a[@title='Learn how your crypto is covered by our insurance policy']")  #I see how to PEP 8 format for a long string but doing this breaks the XPATH, so these two lines went over the 79 characters   
+        "//a[@title=" +
+        "'Learn how your crypto is covered by our insurance policy']")  #I see how to PEP 8 format for a long string but doing this breaks the XPATH, so these two lines went over the 79 characters   
     industry_best_practices_link_loc = (by.XPATH,
         "//a[@title='Learn how we implement industry best practices for account security']")
 
@@ -142,9 +144,7 @@ class HomePage:
 
         # COOKIE BANNER
 
-        self.cookie_banner_dismiss_button =  DialogueBox(self.driver,self.cookie_banner_dismiss_button_loc)
-
-        #cookie_banner_dismiss_button =  DialogueBox(driver,self.cookie_dismiss_button_loc,self.visible_dialogue_box_loc)
+        self.cookie_banner_dismiss_button =  Button(self.driver,self.cookie_banner_dismiss_button_loc)
 
         # NAVIGATION BAR
 
