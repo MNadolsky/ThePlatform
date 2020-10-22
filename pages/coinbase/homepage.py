@@ -1,4 +1,6 @@
 
+import time
+
 import config
 from pages.templates.elements import *
 from selenium.common.exceptions import NoSuchElementException
@@ -6,14 +8,26 @@ from selenium.common.exceptions import NoSuchElementException
 
 class HomePage:
 
-    def __init__(self, driver, dismissCookies=True):
+    def __init__(self, driver, spawn=True, dismissCookies=True):
+        """
+        inputs
+        -----
+        driver = selenium driver
+        spawn: bool
+            The default use case is that the driver being passed in is new and 
+            needs to be navigated to the homepage. if spawn=False, it is assumed
+            that the driver passed in is already at the homepage.
+        """
 
         driver.get(config.coinbase_domain)
-        cookie_dismiss_button = DialogueBox(driver,self.cookie_dismiss_button_loc,self.visible_dialogue_box_loc)        
-        if dismissCookies: cookie_dismiss_button.click()
 
         self.driver = driver
         self.build_elements()
+
+        if dismissCookies: 
+            wait(driver,10).until(EC.visibility_of_element_located(self.visible_dialogue_box_loc))
+            self.cookie_dismiss_button.click()
+
 
     # A dismiss cookie dialogue box appears and hides elements, clicking
     # the dismiss button performed in the init method fixes this issue  
@@ -129,7 +143,7 @@ class HomePage:
 
     def build_elements(self):
 
-        #self.cookie_button = DialogueBox(self.driver,self.cookie_dismiss_button_loc)
+        self.cookie_dismiss_button = Button(self.driver,self.cookie_dismiss_button_loc)
 
         # NAVIGATION BAR
 
