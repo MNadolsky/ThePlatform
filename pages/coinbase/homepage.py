@@ -86,9 +86,11 @@ class HomePage:
     secure_storage_link_loc =       (by.XPATH,
         "//a[@title='Learn how Coinbase keeps your funds safe and secure']")     
     protected_insurance_link_loc =      (by.XPATH,
-        "//a[@title='Learn how your crypto is covered by our insurance policy']")  #I see how to PEP 8 format for a long string but doing this breaks the XPATH, so these two lines went over the 79 characters   
-    industry_best_practices_link_loc = (by.XPATH,
-        "//a[@title='Learn how we implement industry best practices for account security']")
+        "//a[@title="
+        +"'Learn how your crypto is covered by our insurance policy']")  #I see how to PEP 8 format for a long string but doing this breaks the XPATH, so these two lines went over the 79 characters   
+    industry_best_practices_link_loc = (by.XPATH,"//a[@title="
+        +"'Learn how we implement industry best" 
+        +" practices for account security']")
 
     # LANGUAGE MENU FOOTER
 
