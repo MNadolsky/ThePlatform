@@ -6,15 +6,23 @@ from selenium.common.exceptions import NoSuchElementException
 
 class HomePage:
 
-    def __init__(self, driver, close_cookie_banner=True):
-
+    def __init__(self, driver, spawn=True, close_cookie_banner=True):
+        """
+        inputs
+        -----
+        driver = selenium driver
+        spawn: bool
+            The default use case is that the driver being passed in is new and
+            needs to be navigated to the homepage. if spawn=False, it is assumed
+            that the driver passed in is already at the homepage.
+        """
         driver.get(config.coinbase_domain)
 
-        self.driver = driver    #this needs to be before the button to be able to load the button duhhh
+        self.driver = driver
         self.build_elements()
 
         if close_cookie_banner:
-            wait(driver,10).until(EC.visibility_of_element_located(
+            wait(self.driver,10).until(EC.visibility_of_element_located(
                 self.visible_cookie_banner_loc))
             self.cookie_banner_dismiss_button.click()
 
@@ -86,10 +94,17 @@ class HomePage:
     secure_storage_link_loc =       (by.XPATH,
         "//a[@title='Learn how Coinbase keeps your funds safe and secure']")     
     protected_insurance_link_loc =      (by.XPATH,
+<<<<<<< HEAD
         "//a[@title="
         +"'Learn how your crypto is covered by our insurance policy']")  #I see how to PEP 8 format for a long string but doing this breaks the XPATH, so these two lines went over the 79 characters   
     industry_best_practices_link_loc = (by.XPATH,"//a[@title="
         +"'Learn how we implement industry best" 
+=======
+        "//a[@title=" +
+        "'Learn how your crypto is covered by our insurance policy']")  #I see how to PEP 8 format for a long string but doing this breaks the XPATH, so these two lines went over the 79 characters   
+    industry_best_practices_link_loc = (by.XPATH,"//a[@title="
+        +"'Learn how we implement industry best"
+>>>>>>> 308bdb050cfb5790847d4af1567a1032ef2c602c
         +" practices for account security']")
 
     # LANGUAGE MENU FOOTER
@@ -144,9 +159,7 @@ class HomePage:
 
         # COOKIE BANNER
 
-        self.cookie_banner_dismiss_button =  DialogueBox(self.driver,self.cookie_banner_dismiss_button_loc)
-
-        #cookie_banner_dismiss_button =  DialogueBox(driver,self.cookie_dismiss_button_loc,self.visible_dialogue_box_loc)
+        self.cookie_banner_dismiss_button =  Button(self.driver, self.cookie_banner_dismiss_button_loc)
 
         # NAVIGATION BAR
 

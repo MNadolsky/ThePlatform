@@ -11,21 +11,22 @@ from pages.coinbase.signin import SigninPage
 from pages.coinbase.dashboard import DashboardPage
 
 
+
 class Login(unittest.TestCase):
 
     def setUp(self):
 
         driver = webdriver.Chrome(config.chromedriver_path)
-        self.page = SigninPage(driver, drivethrough=False, bypass_auth=False)
+        self.page = SigninPage(driver, spawn=True)
 
-    def testSuccessful(self):
+    def runTest(self):
         """
         Confirm that logging in succeeds.
 
         Acceptance Criteria
         --------------------
         - When a valid username and password combination is submitted through
-          /signin the user is directed to /dashboard and signed in 
+          /signin the user is directed to /dashboard and signed in
         """
 
         page = self.page
@@ -41,6 +42,20 @@ class Login(unittest.TestCase):
 
         self.assertTrue('user is', 'logged in')
 
+    def tearDown(self):
+
+        self.page.driver.quit()
+
+
+
+
+class LoginErrors(unittest.TestCase):
+
+    def setUp(self):
+
+        driver = webdriver.Chrome(config.chromedriver_path)
+        self.page = SigninPage(driver, spawn=True, bypass_auth=False)
+
     def testWrongUsername(self):
 
         page = self.page
@@ -51,20 +66,46 @@ class Login(unittest.TestCase):
 
         self.assertTrue(page.sign_in_error_alert.exists())
         self.assertEqual(
-            page.sign_in_error_alert.element().get_attribute('style'),
-            '')
+            page.sign_in_error_alert.element().get_attribute('style'), '')
 
-    def testWrongPassword(self): pass
+    def testWrongPassword(self):
 
-    def testNoUsername(self): pass
+        page = self.page
 
-    def testNoPassword(self): pass
+        page.email_field.input(secure.creds.CBuser)
+        page.pass_field.input('a' + secure.creds.CBpass)
+        page.sign_in_button.click()
 
-    def invalid_email_address(self): pass # missing @
+        self.assertTrue(page.sign_in_error_alert.exists())
+        self.assertEqual(
+            page.sign_in_error_alert.element().get_attribute('style'), '')
+
+    def testNoUsername(self):
+
+        page = self.page
+
+        page.pass_field.input(secure.creds.CBpass)
+        page.sign_in_button.click()
+
+        self.assertTrue(page.sign_in_error_alert.exists())
+        self.assertEqual(
+            page.sign_in_error_alert.element().get_attribute('style'), '')
+
+    def testNoPassword(self):
+
+        page = self.page
+
+        page.email_field.input(secure.creds.CBuser)
+        page.sign_in_button.click()
+
+        self.assertTrue(page.sign_in_error_alert.exists())
+        self.assertEqual(
+            page.sign_in_error_alert.element().get_attribute('style'), '')
 
     def tearDown(self):
 
         self.page.driver.quit()
+
 
 
 
@@ -73,7 +114,7 @@ class Logout(unittest.TestCase):
     def setUp(self):
 
         driver = webdriver.Chrome(config.chromedriver_path)
-        page = SigninPage(driver, drivethrough=False)
+        page = SigninPage(driver, spawn=True)
         page.login()
         self.page = DashboardPage(driver)
 
@@ -86,18 +127,20 @@ class Logout(unittest.TestCase):
           /signin and cannot reach /dashboard without loggin in again
         """
 
-        self.page.avatar_menu.select('Sign out')
+        page = self.page
+
+        page.avatar_menu.select('Sign out')
 
         self.assertEqual \
-            (self.driver.title, 'Coinbase - Buy/Sell Digital Currency')
+            (page.driver.title, 'Coinbase - Buy/Sell Digital Currency')
         self.assertEqual \
-            (self.driver.current_url, config.coinbase_domain + '/signin') 
+            (page.driver.current_url, config.coinbase_domain + '/signin')
 
         self.assertTrue('user cannot', 'reach dashboard')
 
     def tearDown(self):
 
-        self.page.driver.quit() 
+        self.page.driver.quit()
 
 
 
