@@ -174,10 +174,10 @@ class ReactiveMenu(Element):
             item_loc = (by.XPATH, f"//*[.='{item_selector}']")
             item = self.driver.find_element(*item_loc)
 
-        if item.tag_name != 'a': 
+        if item.tag_name is not 'a': 
 
             parent = item.find_element_by_xpath('..')            
-            if parent == 'a': item = parent
+            if parent is 'a': item = parent
 
         item.click()
 
