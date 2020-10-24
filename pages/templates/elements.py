@@ -73,25 +73,6 @@ class Button(Element):
             return pages.destinations.get_page(self.driver, self.destination)
 
 
-class CheckBox(Element):
-
-    def click(self):
-    
-        wait(self.driver,10).until(EC.element_to_be_clickable(self.locator))
-        self.element().click()
-
-    #to determine if a checkbox is Checked; if checked returns True is not checked returns False
-    def isChecked(self):
-
-        wait(self.driver,10).until(EC.visibility_of_element_located(self.locator))
-        return self.driver.find_element(*self.locator).is_selected()
-
-    def alwaysSelectBox(self):
-
-        wait(self.driver,10).until(EC.visibility_of_element_located(self.locator))
-        if self.isChecked(): pass
-        else: self.element().click()
-
 class Link(Element):
     """
     Inputs:
