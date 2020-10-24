@@ -6,6 +6,9 @@ from selenium.webdriver.support import expected_conditions as EC
 
 import sys
 
+import pages.destinations
+
+
 
 class Element:
     """
@@ -49,12 +52,15 @@ class Button(Element):
               with the next line before the "click" is finished. wait_for
               specifies an element that must be visible before the click() will
               exit.
+    destination: string
+                 For use, see pages.destinations documentation
     """
 
-    def __init__(self, driver, locator, wait_for=None):
+    def __init__(self, driver, locator, wait_for=None, destination=None):
 
         super().__init__(driver, locator)
         self.wait_locator = wait_for
+        self.destination = destination
 
     def click(self):
 
@@ -62,6 +68,9 @@ class Button(Element):
         self.element().click()
         if self.wait_locator: wait(self.driver,10).until(
             EC.visibility_of_element_located(self.wait_locator))
+
+        if self.destination:
+            return pages.destinations.get_page(self.driver, self.destination)
 
 
 class CheckBox(Element):
@@ -84,11 +93,24 @@ class CheckBox(Element):
         else: self.element().click()
 
 class Link(Element):
+    """
+    Inputs:
+    -----
+    destination: string
+                 For use, see pages.destinations documentation
+    """
+    def __init__(self, driver, locator, destination=None):
+
+        super().__init__(driver, locator)
+        self.destination = destination
 
     def click(self):
 
         wait(self.driver,10).until(EC.element_to_be_clickable(self.locator))
         self.element().click()
+
+        if self.destination:
+            return pages.destinations.get_page(self.driver, self.destination)
 
 
 

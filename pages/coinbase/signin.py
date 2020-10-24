@@ -67,11 +67,13 @@ class SigninPage:
 
         # NAVIGATION BAR
 
-        self.home_link =      Link(self.driver, self.home_link_loc)
+        self.home_link =      Link(
+            self.driver, self.home_link_loc, destination='home')
         self.products_menu =  ReactiveMenu(self.driver, self.products_menu_loc)
         self.help_link =      Link(self.driver, self.help_link_loc)
         self.prices_link =    Link(self.driver, self.prices_link_loc)
-        self.sign_in_link =   Link(self.driver, self.sign_in_link_loc)
+        self.sign_in_link =   Link(
+            self.driver, self.sign_in_link_loc, destination='signin')
         self.sign_up_button = Button(self.driver, self.sign_up_button_loc)
         
         # BODY
@@ -98,35 +100,23 @@ class SigninPage:
 
     # WORKFLOWS 
 
-    def login(self, bypass_auth=True):
+    def login(self, bypass_auth=False):
         """
         The normal user login flow beginning from /signin
-
         inputs
         -----
-        bypass_auth: bool       #Should this docString be near the __init__ method? since bypas_auth is first given there
-            Two-factor authentication is manditory. When bypass_auth is true,
-            cookies for the option to bypass are added before login. The cookie
-            file is in /secure and not tracked, so one must be built:
-            1. Log in manually, choosing the option to skip two-factor auth next
-               time
-            2. Log out
-            3. Do driver.get_cookies and print the results (it's a list)
-            4. Make a file called cookies in /secure, declare a single variable
-               called coinbase, and copy and paste the cookie list into the variable
-            5. Delete any newlines in the middle of the dictionary keys/values
-
-            If bypass_auth is False, the login process will require two-factor
-            auth.
+        bypass_auth: bool
+            See __init__() docstring
         """
 
         if bypass_auth:
-            #self.driver.delete_all_cookies()
             for cookie in secure.cookies.coinbase:self.driver.add_cookie(cookie)
 
         self.email_field.input(secure.creds.CBuser)
         self.pass_field.input(secure.creds.CBpass)
-        self.sign_in_button.click()
+        dashboard_page = self.sign_in_button.click()
+
+        return dashboard_page
         
 
 
