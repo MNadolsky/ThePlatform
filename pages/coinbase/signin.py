@@ -55,10 +55,10 @@ class SigninPage:
     keep_me_signed_in_checkbox_loc =   (by.ID, 'stay_signed_in')
     sign_in_button_loc =               (by.ID, 'signin_button')
     forgot_password_link_loc =         (by.LINK_TEXT, 'Forgot password?')
-    not_have_account_link_loc =        (by.LINK_TEXT, "Don't have an account?")
+    no_account_link_loc =              (by.LINK_TEXT, "Don't have an account?")
     privacy_policy_link_loc =          (by.PARTIAL_LINK_TEXT, 'Privacy Policy')
-    two_factor_link_loc =              (by.LINK_TEXT,
-                                 'Have an issue with 2-factor authentication?')
+    two_factor_link_loc =              (
+        by.LINK_TEXT, 'Have an issue with 2-factor authentication?')
 
     # MISC
 
@@ -68,36 +68,44 @@ class SigninPage:
 
         # NAVIGATION BAR
 
-        self.home_link =      Link(self.driver,
-                                   self.home_link_loc, destination='home')
-        self.products_menu =  ReactiveMenu(self.driver, self.products_menu_loc)
-        self.help_link =      Link(self.driver, self.help_link_loc)
-        self.prices_link =    Link(self.driver, self.prices_link_loc)
-        self.sign_in_link =   Link(self.driver,
-                                   self.sign_in_link_loc, destination='signin')
-        self.sign_up_button = Button(self.driver, self.sign_up_button_loc)
+        self.home_link =                                    Link(
+            self.driver, self.home_link_loc, destination='home')
+        self.products_menu =                                ReactiveMenu(
+            self.driver, self.products_menu_loc)
+        self.help_link =                                    Link(
+            self.driver, self.help_link_loc)
+        self.prices_link =                                  Link(
+            self.driver, self.prices_link_loc)
+        self.sign_in_link =                                 Link(
+            self.driver, self.sign_in_link_loc, destination='signin')
+        self.sign_up_button =                               Button(
+            self.driver, self.sign_up_button_loc)
         
         # BODY
 
-        self.email_field =    Field(self.driver, self.email_field_loc)
-        self.pass_field =     Field(self.driver, self.pass_field_loc)
-        self.keep_me_signed_in_checkbox = """CheckBox(self.driver,              #When CheckBox element is created will uncomment 
-                                        self.keep_me_signed_in_checkbox_loc)"""
-        self.sign_in_button = Button(self.driver, self.sign_in_button_loc)
-        self.forgot_password_link= Link(self.driver,
-                                        self.forgot_password_link_loc)
-        self.not_have_account_link= Link(self.driver,
-                                         self.not_have_account_link_loc)
-        self.privacy_policy_link = Link(self.driver,
-                                        self.privacy_policy_link_loc)
-        self.two_factor_link= Link(self.driver,self.two_factor_link_loc)       
+        self.email_field =                                  Field(
+            self.driver, self.email_field_loc)
+        self.pass_field =                                   Field(
+            self.driver, self.pass_field_loc)
+        #self.keep_me_signed_in_checkbox = CheckBox(self.driver,              #When CheckBox element is created will uncomment 
+                                        #self.keep_me_signed_in_checkbox_loc)
+        self.sign_in_button =                               Button(
+            self.driver, self.sign_in_button_loc)
+        self.forgot_password_link =                         Link(
+            self.driver, self.forgot_password_link_loc)
+        self.no_account_link =                        Link(
+            self.driver, self.no_account_link_loc)
+        self.privacy_policy_link =                          Link(
+            self.driver, self.privacy_policy_link_loc)
+        self.two_factor_link=                               Link(
+            self.driver,self.two_factor_link_loc)       
 
         # MISC
 
         # This element only appears after an errant login attempt; it is the 
         # error message popup
-        self.sign_in_error_alert = Element(self.driver,
-                                           self.sign_in_error_alert_loc)
+        self.sign_in_error_alert =                          Element(
+            self.driver, self.sign_in_error_alert_loc)
 
     # WORKFLOWS 
 
