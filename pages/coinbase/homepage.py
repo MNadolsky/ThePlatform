@@ -27,8 +27,9 @@ class HomePage:
         self.build_elements()
 
         if close_cookie_banner:
+        #The send keys is needed to 'dig out' the button from the cookie banner
             driver.find_element(
-            *self.cookie_banner_dismiss_button_loc).send_keys(Keys.ENTER)   #The send keys is needed to 'dig out' the button from the cookie banner
+            *self.cookie_banner_dismiss_button_loc).send_keys(Keys.ENTER)
 
     # A dismiss cookie dialogue box appears and hides elements, clicking
     # the dismiss button performed in the init method fixes this issue  
@@ -76,7 +77,7 @@ class HomePage:
 
     # EARNING LINKS BLCOK
 
-    start_earning_button_loc = (
+    start_earning_button_loc =        (
         by.XPATH, "//button[contains(@class,'EarnUpsellBanner')]")
     footer_start_earning_button_loc = (
         by.XPATH, "//button[contains(@class,'EarnFooterBanner')]")
@@ -155,12 +156,14 @@ class HomePage:
 
         # NAVIGATION BAR
 
-        self.home_link =       Link(self.driver, self.home_link_loc)
+        self.home_link =       Link(
+            self.driver, self.home_link_loc, destination='home')
         self.prices_link =     Link(self.driver, self.prices_link_loc)
         self.products_menu =   ReactiveMenu(self.driver,self.products_menu_loc)
         self.company_menu =    ReactiveMenu(self.driver, self.company_menu_loc)
         self.earn_crypto_link = Link(self.driver, self.earn_crypto_link_loc)
-        self.sign_in_link =    Link(self.driver, self.sign_in_link_loc)
+        self.sign_in_link =    Link(
+            self.driver, self.sign_in_link_loc, destination='signin')
         self.header_get_started_button = Button(
             self.driver, self.header_get_started_button_loc)
 
