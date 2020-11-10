@@ -1,6 +1,7 @@
 
 import config
 from pages.templates.elements import *
+import time 
 
 class HomePage:
 
@@ -24,15 +25,17 @@ class HomePage:
         self.build_elements()
 
         if close_cookie_banner:
+            #time.sleep(1)
             wait(self.driver,10).until(EC.visibility_of_element_located(
                 self.visible_cookie_banner_dismiss_button_loc))
+            #time.sleep(1)
             self.cookie_banner_dismiss_button.click()
 
 
     # A dismiss cookie dialogue box appears and hides elements, clicking
     # the dismiss button performed in the init method fixes this issue  
     visible_cookie_banner_dismiss_button_loc = (by.XPATH,
-                "//a[.='Cookie Policy']/parent::div/following-sibling::button")
+                "//div[contains(text(),'third-party cookies')]/parent::div")
     cookie_banner_dismiss_button_loc = (by.XPATH, "//button[.='Dismiss']")
 
     # NAVIGATION BAR
