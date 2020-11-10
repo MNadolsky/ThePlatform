@@ -1,12 +1,8 @@
 
 import config
 from pages.templates.elements import *
-<<<<<<< HEAD
-import time 
-=======
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
->>>>>>> d200ea196c656a7f0597b0be3d479cbdec5ec61b
 
 
 class HomePage:
@@ -31,26 +27,12 @@ class HomePage:
         self.build_elements()
 
         if close_cookie_banner:
-<<<<<<< HEAD
-            #time.sleep(1)
-            wait(self.driver,10).until(EC.visibility_of_element_located(
-                self.visible_cookie_banner_dismiss_button_loc))
-            #time.sleep(1)
-            self.cookie_banner_dismiss_button.click()
-
-
-    # A dismiss cookie dialogue box appears and hides elements, clicking
-    # the dismiss button performed in the init method fixes this issue  
-    visible_cookie_banner_dismiss_button_loc = (by.XPATH,
-                "//div[contains(text(),'third-party cookies')]/parent::div")
-=======
         #The send keys is needed to 'dig out' the button from the cookie banner
             driver.find_element(
             *self.cookie_banner_dismiss_button_loc).send_keys(Keys.ENTER)
 
     # A dismiss cookie dialogue box appears and hides elements, clicking
     # the dismiss button performed in the init method fixes this issue  
->>>>>>> d200ea196c656a7f0597b0be3d479cbdec5ec61b
     cookie_banner_dismiss_button_loc = (by.XPATH, "//button[.='Dismiss']")
 
     # NAVIGATION BAR
