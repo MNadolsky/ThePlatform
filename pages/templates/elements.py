@@ -73,7 +73,6 @@ class Button(Element):
             return pages.destinations.get_page(self.driver, self.destination)
 
 
-
 class Link(Element):
     """
     Inputs:
