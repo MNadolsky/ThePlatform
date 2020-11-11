@@ -1,6 +1,7 @@
 
 import unittest
 import time
+import os
 
 from selenium import webdriver
 
@@ -13,8 +14,8 @@ from pages.coinbase.homepage import HomePage
 class HomePageSetup(unittest.TestCase):
 
     def setUp(self):
-        
-        driver = webdriver.Chrome(config.chromedriver_path)
+        root_path = os.path.dirname(os.path.realpath(__file__))
+        driver = webdriver.Chrome(root_path + config.win_chromedriver_path)
         self.page = HomePage(driver)
     
     def tearDown(self):
