@@ -100,8 +100,7 @@ class Field(Element):
     def click(self): self.element().click()
     def input(self, keys): self.element().send_keys(keys)
     def clear(self): self.element().clear()
-
-
+    
 
 class ReactiveMenu(Element):
     """
@@ -180,18 +179,4 @@ class ReactiveMenu(Element):
             if parent is 'a': item = parent
 
         item.click()
-
-
-            
-
-
-
-
-
-
-
-
-
-
-
 

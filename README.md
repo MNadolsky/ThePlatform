@@ -1,6 +1,10 @@
 # ThePlatfrom
 A python automation platform using selenium and unittest
 
+## Support
+
+Windows and Mac. Linux not supported.
+
 ## Setup
 
 ### Chromedriver
