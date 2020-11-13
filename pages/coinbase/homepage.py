@@ -52,7 +52,6 @@ class HomePage:
     get_started_button_loc =  (
         by.XPATH, "//input[@type='email']/following-sibling::button")
     create_account_dial_box_loc = (by.XPATH, "//span[.='Create account']")
-    close_create_account_dial_box_loc = (by.XPATH, "//svg[contains(@class,'CloseIcon')]")
 
     # CRYPTO CURRENCY/PRODUCTS MENU
 
@@ -180,7 +179,6 @@ class HomePage:
             self.driver, self.get_started_button_loc)
         self.create_account_dial_box = Element(
             self.driver,self.create_account_dial_box_loc)
-        self.close_create_account_dial_box_loc = ''
 
         # CRYPTO CURRENCY/PRODUCTS MENU
 
@@ -212,14 +210,14 @@ class HomePage:
             self.driver, self.litecoin_buy_button_loc)
 
         self.total_product_link_list = [
-            self.bitcoin_text_link, self.bitcoin_BTC_link, 
-            self.bitcoin_logo_link, self.bitcoin_buy_button, 
-            self.ethereum_text_link, self.ethereum_ETH_link,
-            self.ethereum_logo_link, self.ethereum_buy_button,
+            self.bitcoin_text_link,     self.bitcoin_BTC_link, 
+            self.bitcoin_logo_link,     self.bitcoin_buy_button, 
+            self.ethereum_text_link,    self.ethereum_ETH_link,
+            self.ethereum_logo_link,    self.ethereum_buy_button,
             self.bitcoinCash_text_link, self.bitcoinCash_BCH_link,
             self.bitcoinCash_logo_link, self.bitcoinCash_buy_button,
-            self.litecoin_text_link, self.litecoin_LTC_link,
-            self.litecoin_logo_link, self.litecoin_buy_button]
+            self.litecoin_text_link,    self.litecoin_LTC_link,
+            self.litecoin_logo_link,    self.litecoin_buy_button]
 
         # EARNING LINKS BLCOK
 

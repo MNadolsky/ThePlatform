@@ -82,10 +82,13 @@ class HomePageProducts(HomePageSetup):
 
     def testProductsLink(self):
 
-        self.page.total_product_link_list[
-            Tools().generate_random_num(1,16)].click()
+        product_list_num = Tools().generate_random_num(1,16)
+
+        self.page.total_product_link_list[product_list_num].click()
+
         self.assertTrue(self.page.create_account_dial_box.exists(),
-        'create account is not opened when bitcoin text is clicked')
+        'create account is not opened when' + 'need Link class get text method'
+        + 'is clicked')
 
 
 if __name__ == '__main__': unittest.main()
