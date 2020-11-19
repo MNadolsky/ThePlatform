@@ -139,6 +139,7 @@ dmypy.json
 
 # Tony's py
 
+coinbase_test_suite.py
 Sand_Box.py
 sand_box2.py
 sand_box3.py
