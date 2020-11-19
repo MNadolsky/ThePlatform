@@ -6,7 +6,7 @@ import os
 import config
 import secure.creds
 from pages.coinbase.homepage import HomePage
-from tools.helpers import Tools
+import tools.helpers
 
 root_path = os.path.dirname(os.path.realpath(__file__))
 if 'Darwin' in platform.system():
@@ -34,61 +34,32 @@ class HomePageProducts(HomePageSetup):
 
     acceptance cirteria
     --------------------
-    -All of the provided featured products are listed in any order.
-    -All of the provided featured products are listed in order.
-    -When clicking on any of these products link it opens the "create new
-     account dialogue box".   
+    -All of the provided featured products are listed.
+    -When clicking on a random product link it opens the "create new account
+     dialogue box".   
     """
 
-    def testProductsExistAnyOrder(self):
-
-        provided_featured_product_list = ['Bitcoin\nBTC', 'Ethereum\nETH',
-                                          'Bitcoin Cash\nBCH', 'Litecoin\nLTC']  
-
-        featured_product_list_text = Tools().format_element_list_to_text_list(
-            self.page.featured_product_list)
+    def testProductsExist(self):
+        #the source of truth is the provided_featured_product_set
+        provided_featured_product_set = {'Bitcoin\nBTC', 'Ethereum\nETH', 
+                                          'Bitcoin Cash\nBCH', 'Litecoin\nLTC'}  
+        #the set of products from coinbase is the featured_product_set
+        featured_product_set = set() 
+        for element in self.page.featured_product_list:
+            featured_product_set.add(element.text)
         
-        self.assertTrue(Tools().compare_two_lists_sequence_ind(
-            featured_product_list_text, provided_featured_product_list), 
-            'A product from the provided featured list has been removed or'
-            + ' changed')
-
-    def testProductsExistInOrder(self):
-
-        provided_featured_product_acronym_list = ['BTC', 'ETH','BCH', 'LTC']
-
-        provided_featured_product_name_list = ['Bitcoin', 'Ethereum',
-                                               'Bitcoin Cash', 'Litecoin']
-
-        page = self.page
-
-        self.assertEqual(provided_featured_product_acronym_list[0],
-            self.driver.find_element(*page.bitcoin_BTC_link_loc).text)
-        self.assertEqual(provided_featured_product_acronym_list[1],
-            self.driver.find_element(*page.ethereum_ETH_link_loc).text)
-        self.assertEqual(provided_featured_product_acronym_list[2],
-            self.driver.find_element(*page.bitcoinCash_BCH_link_loc).text)
-        self.assertEqual(provided_featured_product_acronym_list[3],
-            self.driver.find_element(*page.litecoin_LTC_link_loc).text)
-
-        self.assertEqual(provided_featured_product_name_list[0],
-            self.driver.find_element(*page.bitcoin_text_link_loc).text)
-        self.assertEqual(provided_featured_product_name_list[1],
-            self.driver.find_element(*page.ethereum_text_link_loc).text)
-        self.assertEqual(provided_featured_product_name_list[2],
-            self.driver.find_element(*page.bitcoinCash_text_link_loc).text)
-        self.assertEqual(provided_featured_product_name_list[3],
-            self.driver.find_element(*page.litecoin_text_link_loc).text)
+        self.assertEqual(featured_product_set, provided_featured_product_set)
 
     def testProductsLink(self):
+        page = self.page
+        random_product_num = tools.helpers.generate_random_num(1,16)
+        #a randomly chosen product is below
+        page.product_link_list[random_product_num].click()
 
-        product_list_num = Tools().generate_random_num(1,16)
+        self.assertTrue(page.account_dial_box.exists(),
+        'create account is not opened when the number ' +
+        str(random_product_num)+' link of the product link list is clicked')
 
-        self.page.total_product_link_list[product_list_num].click()
-
-        self.assertTrue(self.page.create_account_dial_box.exists(),
-        'create account is not opened when' + 'need Link class get text method'
-        + 'is clicked')
-
+        page.account_dial_box_close.click()
 
 if __name__ == '__main__': unittest.main()

@@ -48,10 +48,12 @@ class HomePage:
          
     # CREATE ACCOUNT
 
-    email_address_field_loc = (by.XPATH, "//input[@type='email']")
-    get_started_button_loc =  (
+    email_address_field_loc =    (by.XPATH, "//input[@type='email']")
+    get_started_button_loc =     (
         by.XPATH, "//input[@type='email']/following-sibling::button")
-    create_account_dial_box_loc = (by.XPATH, "//span[.='Create account']")
+    account_dial_box_loc =       (by.XPATH, "//span[.='Create account']")
+    account_dial_box_close_loc = (by.XPATH,
+        "//div[contains(@class,'ModalHeader')]/*[name()='svg']")
 
     # CRYPTO CURRENCY/PRODUCTS MENU
 
@@ -177,8 +179,10 @@ class HomePage:
             self.driver, self.email_address_field_loc)
         self.get_started_button =      Button(
             self.driver, self.get_started_button_loc)
-        self.create_account_dial_box = Element(
-            self.driver,self.create_account_dial_box_loc)
+        self.account_dial_box =        Element(
+            self.driver,self.account_dial_box_loc)
+        self.account_dial_box_close =  Button(
+            self.driver,self.account_dial_box_close_loc)
 
         # CRYPTO CURRENCY/PRODUCTS MENU
 
@@ -209,7 +213,7 @@ class HomePage:
         self.litecoin_buy_button = Button(
             self.driver, self.litecoin_buy_button_loc)
 
-        self.total_product_link_list = [
+        self.product_link_list = [
             self.bitcoin_text_link,     self.bitcoin_BTC_link, 
             self.bitcoin_logo_link,     self.bitcoin_buy_button, 
             self.ethereum_text_link,    self.ethereum_ETH_link,
