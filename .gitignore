@@ -137,8 +137,10 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Mine
+# Tony's py
 
 Sand_Box.py
 sand_box2.py
 sand_box3.py
+sand_box_tools.py
+.vscode/
