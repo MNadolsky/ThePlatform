@@ -57,7 +57,7 @@ class HomePage:
 
     # CRYPTO CURRENCY/PRODUCTS MENU
 
-    featured_product_list_loc = (
+    featured_products_loc = (
         by.XPATH, "//td[contains(@class,'AssetTableRow')]/div/div")
 
     bitcoin_text_link_loc =  (by.XPATH, "//h4[.='Bitcoin']")
@@ -186,8 +186,8 @@ class HomePage:
 
         # CRYPTO CURRENCY/PRODUCTS MENU
 
-        self.featured_product_list = self.driver.find_elements(
-            *self.featured_product_list_loc)
+        self.featured_products = self.driver.find_elements(
+            *self.featured_products_loc)
         
         self.bitcoin_text_link =  Link(self.driver,self.bitcoin_text_link_loc)
         self.bitcoin_BTC_link =   Link(self.driver,self.bitcoin_BTC_link_loc)
