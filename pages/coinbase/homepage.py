@@ -213,7 +213,7 @@ class HomePage:
         self.litecoin_buy_button = Button(
             self.driver, self.litecoin_buy_button_loc)
 
-        self.product_link_list = [
+        self.products_links = [
             self.bitcoin_text_link,     self.bitcoin_BTC_link, 
             self.bitcoin_logo_link,     self.bitcoin_buy_button, 
             self.ethereum_text_link,    self.ethereum_ETH_link,
