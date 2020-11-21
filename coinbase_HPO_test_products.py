@@ -40,10 +40,10 @@ class HomePageProducts(HomePageSetup):
     """
 
     def testProductsExist(self):
-        #the source of truth is the provided_featured_product_set
+        # provided_featured_product_set is the source of truth, real world this would be an API, this is a mock
         provided_featured_product_set = {'Bitcoin\nBTC', 'Ethereum\nETH', 
                                           'Bitcoin Cash\nBCH', 'Litecoin\nLTC'}  
-        #the set of products from coinbase is the featured_product_set
+        #getting all the featured products from coinbase is the featured_product_set
         featured_product_set = set() 
         for element in self.page.featured_product_list:
             featured_product_set.add(element.text)
