@@ -48,10 +48,10 @@ class HomePage:
          
     # CREATE ACCOUNT
 
-    email_address_field_loc = (by.XPATH, "//input[@type='email']")
-    get_started_button_loc =  (
+    email_address_field_loc =  (by.XPATH, "//input[@type='email']")
+    get_started_button_loc =   (
         by.XPATH, "//input[@type='email']/following-sibling::button")
-    account_dial_box_loc =       (by.XPATH, "//span[.='Create account']")
+    account_dialogue_box_loc = (by.XPATH, "//span[.='Create account']")
 
     # CRYPTO CURRENCY MENU
 
@@ -170,12 +170,12 @@ class HomePage:
 
         # CREATE ACCOUNT
 
-        self.email_address_field = Field(
+        self.email_address_field =  Field(
             self.driver, self.email_address_field_loc)
-        self.get_started_button =  Button(
+        self.get_started_button =   Button(
             self.driver, self.get_started_button_loc)
-        self.account_dial_box =        Element(
-            self.driver,self.account_dial_box_loc)
+        self.account_dialogue_box = Element(
+            self.driver,self.account_dialogue_box_loc)
 
         # CRYPTO CURRENCY MENU
   
