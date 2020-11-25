@@ -40,26 +40,26 @@ class HomePageProducts(HomePageSetup):
     """
 
     def testProductsExist(self):
-        # provided_featured_product_set is the source of truth, real world this would be an API, this is a mock
-        provided_featured_product_set = {'Bitcoin\nBTC', 'Ethereum\nETH', 
-                                          'Bitcoin Cash\nBCH', 'Litecoin\nLTC'}  
-        #getting all the featured products from coinbase is the featured_product_set
-        featured_product_set = set() 
+        #below is mock data set representing a source of truth 
+        provided_featured_products = {'Bitcoin\nBTC', 'Ethereum\nETH', 
+                                      'Bitcoin Cash\nBCH', 'Litecoin\nLTC'} 
+
+        #featured products retrieved from coinbase
+        featured_products = set() 
         for element in self.page.featured_product_list:
-            featured_product_set.add(element.text)
+            featured_products.add(element.text)
         
-        self.assertEqual(featured_product_set, provided_featured_product_set)
+        self.assertEqual(featured_products, provided_featured_products)
 
     def testProductsLink(self):
         page = self.page
-        random_product_num = tools.helpers.generate_random_num(1,16)
-        #a randomly chosen product is below
-        page.product_link_list[random_product_num].click()
+        
+        for product in page.products_links:
+            product.click()
+            self.assertTrue(page.account_dial_box.exists(),
+            'create account is not opened when the ' + product.element().text +
+            ' link is clicked')
+            page.account_dial_box_close.click()
 
-        self.assertTrue(page.account_dial_box.exists(),
-        'create account is not opened when the number ' +
-        str(random_product_num)+' link of the product link list is clicked')
-
-        page.account_dial_box_close.click()
 
 if __name__ == '__main__': unittest.main()
