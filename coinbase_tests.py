@@ -171,7 +171,7 @@ class HomePageProducts(HomePageSetup):
     acceptance cirteria
     --------------------
     -All of the provided featured products are listed.
-    -When clicking on a random product link it opens the "create new account
+    -When clicking on each of the product's link it opens the "create new account
      dialogue box".   
     """
 

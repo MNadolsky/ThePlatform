@@ -219,7 +219,7 @@ class HomePage:
             self.ethereum_text_link,    self.ethereum_ETH_link,
             self.ethereum_logo_link,    self.ethereum_buy_button,
             self.bitcoinCash_text_link, self.bitcoinCash_BCH_link,
-            self.bitccoinCash_logo_link, self.bitcoinCash_buy_button,
+            self.bitcoinCash_logo_link, self.bitcoinCash_buy_button,
             self.litecoin_text_link,    self.litecoin_LTC_link,
             self.litecoin_logo_link,    self.litecoin_buy_button]
 
