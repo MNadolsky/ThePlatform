@@ -3,7 +3,7 @@ import config
 from pages.templates.elements import *
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-
+import time
 
 class HomePage:
     
@@ -28,6 +28,7 @@ class HomePage:
 
         if close_cookie_banner:
         #The send keys is needed to 'dig out' the button from the cookie banner
+            time.sleep(.5)
             driver.find_element(
             *self.cookie_banner_dismiss_button_loc).send_keys(Keys.ENTER)
 
