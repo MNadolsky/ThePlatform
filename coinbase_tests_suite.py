@@ -1,5 +1,5 @@
 import unittest
-from coinbase_HPO_test_products import *
+from coinbase_tests import *
 
 
 suite = unittest.TestSuite()

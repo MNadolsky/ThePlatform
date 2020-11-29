@@ -186,7 +186,7 @@ class HomePage:
 
         # CRYPTO CURRENCY/PRODUCTS MENU
 
-        self.featured_product_list = self.driver.find_elements(
+        self.featured_products = self.driver.find_elements(
             *self.featured_product_list_loc)
         
         self.bitcoin_text_link =  Link(self.driver,self.bitcoin_text_link_loc)

@@ -12,7 +12,7 @@ from pages.coinbase.homepage import HomePage
 from pages.coinbase.signin import SigninPage
 from pages.coinbase.dashboard import DashboardPage
 
-from tools.helpers import *
+import tools.helpers
 
 root_path = os.path.dirname(os.path.realpath(__file__))
 if 'Darwin' in platform.system():
@@ -177,14 +177,11 @@ class HomePageProducts(HomePageSetup):
         provided_featured_product_set = {'Bitcoin\nBTC', 'Ethereum\nETH', 
                                           'Bitcoin Cash\nBCH', 'Litecoin\nLTC'}  
         #the set of products from coinbase is the featured_product_set
-        featured_product_set = set()
-        for element in self.page.featured_product_list: 
-            featured_product_set.add(element.text)
+        featured_products = set()
+        for product in self.page.featured_products:
+            featured_products.add(product.text)
 
-        for product in self.page.product_link_list:
-            self.assertIn(product.element().text,provided_featured_product_set)
-
-        self.assertEqual(featured_product_set, provided_featured_product_set)
+        self.assertEqual(featured_products, provided_featured_product_set)
 
     def testProductsLink(self):
         page = self.page
