@@ -19,7 +19,7 @@ if 'Darwin' in platform.system():
     chromedriver_path = config.mac_chromedriver_path
 else: 
     chromedriver_path = config.win_chromedriver_path
-'''
+
 class Login(unittest.TestCase):
 
     def setUp(self):
@@ -149,7 +149,7 @@ class Logout(unittest.TestCase):
     def tearDown(self):
 
         self.page.driver.quit()
-'''
+
 class HomePageSetup(unittest.TestCase):
 
     def setUp(self):
@@ -183,37 +183,29 @@ class HomePageCustomerSecurity(HomePageSetup):
         page = self.page
 
         page.secure_storage_link.click()
-        self.assertEqual(page.driver.title,
-            'Secure Bitcoin Storage - Coinbase')
-        self.assertEqual(page.driver.current_url,
-            'https://www.coinbase.com/security')
-        time.sleep(.5)
+        self.assertEqual(page.driver.title,'Secure Bitcoin Storage - Coinbase')
+        self.assertEqual(
+            page.driver.current_url,'https://www.coinbase.com/security')
         driver.back()
 
         page.protected_insurance_link.click()
-        self.assertEqual(page.driver.title,
-            'How is Coinbase insured? | Coinbase Help')
-        self.assertEqual(page.driver.current_url,
-            'https://help.coinbase.com/en/coinbase/other-topics/' +
-            'legal-policies/how-is-coinbase-insured.html')
-        time.sleep(.5)
+        self.assertEqual(
+            page.driver.title,'How is Coinbase insured? | Coinbase Help')
+        self.assertEqual(
+            page.driver.current_url, 'https://help.coinbase.com/en/coinbase/' +
+            'other-topics/legal-policies/how-is-coinbase-insured.html')
         driver.back()
 
         page.industry_best_practices_link.click()
-        self.assertEqual(page.driver.title,
-            'Secure Bitcoin Storage - Coinbase')
-        self.assertEqual(page.driver.current_url,
-            'https://www.coinbase.com/security')
-        time.sleep(.5)
+        self.assertEqual(page.driver.title,'Secure Bitcoin Storage - Coinbase')
+        self.assertEqual(
+            page.driver.current_url,'https://www.coinbase.com/security')
         driver.back()
 
-
         page.wallet_link.click()
-        self.assertEqual(page.driver.title,
-            'Coinbase Wallet')
-        self.assertEqual(page.driver.current_url,
-            'https://wallet.coinbase.com/')
-        time.sleep(.5)
+        self.assertEqual(page.driver.title,'Coinbase Wallet')
+        self.assertEqual(
+            page.driver.current_url,'https://wallet.coinbase.com/')
         driver.back()
 
 if __name__ == '__main__': unittest.main()
