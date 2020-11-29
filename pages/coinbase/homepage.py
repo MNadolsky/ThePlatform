@@ -3,7 +3,6 @@ import config
 from pages.templates.elements import *
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import time
 
 class HomePage:
     
