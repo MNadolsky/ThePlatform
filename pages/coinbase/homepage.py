@@ -178,7 +178,7 @@ class HomePage:
         self.get_started_button =          Button(
             self.driver, self.get_started_button_loc)
         self.create_account_dialogue_box = Element(
-            self.driver,self.create_account_dial_box_loc)
+            self.driver,self.create_account_dialogue_box_loc)
 
         # CRYPTO CURRENCY/PRODUCTS MENU
 
