@@ -192,7 +192,7 @@ class HomePageCreateAccount(HomePageSetup):
 
         page.get_started_button.click()
 
-        self.assertTrue(page.create_account_dial_box.exists(),
+        self.assertTrue(page.create_account_dialogue_box.exists(),
         'create account is not opened when the Get started button is clicked')
 
 
