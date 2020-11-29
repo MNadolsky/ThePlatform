@@ -51,11 +51,7 @@ class HomePage:
     email_address_field_loc =  (by.XPATH, "//input[@type='email']")
     get_started_button_loc =   (
         by.XPATH, "//input[@type='email']/following-sibling::button")
-<<<<<<< HEAD
-    account_dialogue_box_loc = (by.XPATH, "//span[.='Create account']")
-=======
     create_account_dial_box_loc = (by.XPATH, "//span[.='Create account']")
->>>>>>> project
 
     # CRYPTO CURRENCY/PRODUCTS MENU
 
@@ -177,14 +173,6 @@ class HomePage:
 
         # CREATE ACCOUNT
 
-<<<<<<< HEAD
-        self.email_address_field =  Field(
-            self.driver, self.email_address_field_loc)
-        self.get_started_button =   Button(
-            self.driver, self.get_started_button_loc)
-        self.account_dialogue_box = Element(
-            self.driver,self.account_dialogue_box_loc)
-=======
         self.email_address_field =     Field(
             self.driver, self.email_address_field_loc)
         self.get_started_button =      Button(
@@ -193,7 +181,6 @@ class HomePage:
             self.driver,self.create_account_dial_box_loc)
 
         # CRYPTO CURRENCY/PRODUCTS MENU
->>>>>>> project
 
         self.featured_product_list = self.driver.find_elements(
             *self.featured_product_list_loc)
