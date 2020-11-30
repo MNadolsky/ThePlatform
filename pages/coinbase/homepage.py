@@ -27,7 +27,6 @@ class HomePage:
 
         if close_cookie_banner:
         #The send keys is needed to 'dig out' the button from the cookie banner
-            time.sleep(.5)
             driver.find_element(
             *self.cookie_banner_dismiss_button_loc).send_keys(Keys.ENTER)
 
@@ -51,12 +50,8 @@ class HomePage:
     email_address_field_loc = (by.XPATH, "//input[@type='email']")
     get_started_button_loc =  (
         by.XPATH, "//input[@type='email']/following-sibling::button")
-    create_account_dial_box_loc = (by.XPATH, "//span[.='Create account']")
 
     # CRYPTO CURRENCY/PRODUCTS MENU
-
-    featured_product_list_loc = (
-        by.XPATH, "//td[contains(@class,'AssetTableRow')]/div/div")
 
     bitcoin_text_link_loc =  (by.XPATH, "//h4[.='Bitcoin']")
     bitcoin_BTC_link_loc =   (by.XPATH, "//h4[.='BTC']")
@@ -177,13 +172,8 @@ class HomePage:
             self.driver, self.email_address_field_loc)
         self.get_started_button =      Button(
             self.driver, self.get_started_button_loc)
-        self.create_account_dial_box = Element(
-            self.driver,self.create_account_dial_box_loc)
 
         # CRYPTO CURRENCY/PRODUCTS MENU
-
-        self.featured_product_list = self.driver.find_elements(
-            *self.featured_product_list_loc)
         
         self.bitcoin_text_link =  Link(self.driver,self.bitcoin_text_link_loc)
         self.bitcoin_BTC_link =   Link(self.driver,self.bitcoin_BTC_link_loc)
