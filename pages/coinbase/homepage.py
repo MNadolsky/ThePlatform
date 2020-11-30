@@ -199,16 +199,6 @@ class HomePage:
         self.litecoin_buy_button = Button(
             self.driver, self.litecoin_buy_button_loc)
 
-        self.total_product_link_list = [
-            self.bitcoin_text_link,     self.bitcoin_BTC_link, 
-            self.bitcoin_logo_link,     self.bitcoin_buy_button, 
-            self.ethereum_text_link,    self.ethereum_ETH_link,
-            self.ethereum_logo_link,    self.ethereum_buy_button,
-            self.bitcoinCash_text_link, self.bitcoinCash_BCH_link,
-            self.bitcoinCash_logo_link, self.bitcoinCash_buy_button,
-            self.litecoin_text_link,    self.litecoin_LTC_link,
-            self.litecoin_logo_link,    self.litecoin_buy_button]
-
         # EARNING LINKS BLCOK
 
         self.start_earning_button = Button(
