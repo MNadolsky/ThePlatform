@@ -2,7 +2,6 @@
 import unittest
 import platform
 import os
-import time
 
 from selenium import webdriver
 
@@ -196,11 +195,6 @@ class HomePageProducts(HomePageSetup):
             'create account is not opened when the ' + product.element().text +
             ' link is clicked')
             page.account_dial_box_close.click()
-
-
-
-
-
 
 
 if __name__ == '__main__': unittest.main()
