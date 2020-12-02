@@ -150,7 +150,7 @@ class Logout(unittest.TestCase):
 
         self.page.driver.quit()
 
-class HomePageSetup(unittest.TestCase):
+class HomePageSetupTemplate(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.Chrome(root_path + config.win_chromedriver_path)
@@ -161,7 +161,7 @@ class HomePageSetup(unittest.TestCase):
         self.page.driver.quit()
 
 
-class HomePageCustomerSecurity(HomePageSetup):
+class HomePageCustomerSecurity(HomePageSetupTemplate):
     """
     Confirm that the four links concerning the safety and security of the
     customer's funds are functional.
@@ -179,14 +179,13 @@ class HomePageCustomerSecurity(HomePageSetup):
     """
 
     def testSecurityLinks(self):
-        driver = self.driver
         page = self.page
 
         page.secure_storage_link.click()
         self.assertEqual(page.driver.title,'Secure Bitcoin Storage - Coinbase')
         self.assertEqual(
             page.driver.current_url,'https://www.coinbase.com/security')
-        driver.back()
+        page.driver.back()
 
         page.protected_insurance_link.click()
         self.assertEqual(
@@ -194,18 +193,18 @@ class HomePageCustomerSecurity(HomePageSetup):
         self.assertEqual(
             page.driver.current_url, 'https://help.coinbase.com/en/coinbase/' +
             'other-topics/legal-policies/how-is-coinbase-insured.html')
-        driver.back()
+        page.driver.back()
 
         page.industry_best_practices_link.click()
         self.assertEqual(page.driver.title,'Secure Bitcoin Storage - Coinbase')
         self.assertEqual(
             page.driver.current_url,'https://www.coinbase.com/security')
-        driver.back()
+        page.driver.back()
 
         page.wallet_link.click()
         self.assertEqual(page.driver.title,'Coinbase Wallet')
         self.assertEqual(
             page.driver.current_url,'https://wallet.coinbase.com/')
-        driver.back()
+        page.driver.back()
 
 if __name__ == '__main__': unittest.main()
