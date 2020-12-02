@@ -150,7 +150,7 @@ class Logout(unittest.TestCase):
 
         self.page.driver.quit()
 
-class HomePageSetup(unittest.TestCase):
+class HomePageSetupTemplate(unittest.TestCase):
     
     def setUp(self):
         self.driver = webdriver.Chrome(root_path + config.win_chromedriver_path)
@@ -161,7 +161,7 @@ class HomePageSetup(unittest.TestCase):
         self.page.driver.quit()
 
 
-class HomePageSignIn(HomePageSetup):
+class HomePageSignIn(HomePageSetupTemplate):
     """
     Ensure clicking on the sign in link will navigate the user to the sign in 
     page.
