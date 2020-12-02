@@ -151,7 +151,7 @@ class Logout(unittest.TestCase):
         self.page.driver.quit()
 
 
-class HomePageSetup(unittest.TestCase):
+class HomePageSetupTemplate(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.Chrome(root_path + config.win_chromedriver_path)
@@ -162,7 +162,7 @@ class HomePageSetup(unittest.TestCase):
         self.page.driver.quit()
 
 
-class HomePageCreateAccount(HomePageSetup):
+class HomePageCreateAccount(HomePageSetupTemplate):
     """
     Confirm that both create account buttons navigates to correct URL or 
     dialogue box.
