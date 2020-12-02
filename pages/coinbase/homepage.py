@@ -51,9 +51,6 @@ class HomePage:
     email_address_field_loc =    (by.XPATH, "//input[@type='email']")
     get_started_button_loc =     (
         by.XPATH, "//input[@type='email']/following-sibling::button")
-    account_dial_box_loc =       (by.XPATH, "//span[.='Create account']")
-    account_dial_box_close_loc = (by.XPATH,
-        "//div[contains(@class,'ModalHeader')]/*[name()='svg']")
 
     # CRYPTO CURRENCY/PRODUCTS MENU
 
@@ -179,10 +176,6 @@ class HomePage:
             self.driver, self.email_address_field_loc)
         self.get_started_button =      Button(
             self.driver, self.get_started_button_loc)
-        self.account_dial_box =        Element(
-            self.driver,self.account_dial_box_loc)
-        self.account_dial_box_close =  Button(
-            self.driver,self.account_dial_box_close_loc)
 
         # CRYPTO CURRENCY/PRODUCTS MENU
 
