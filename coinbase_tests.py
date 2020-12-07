@@ -154,7 +154,7 @@ class Logout(unittest.TestCase):
 class HomePageSetupTemplate(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Chrome(root_path + config.win_chromedriver_path)
+        self.driver = webdriver.Chrome(root_path + chromedriver_path)
         self.page = HomePage(self.driver)
     
     def tearDown(self):
