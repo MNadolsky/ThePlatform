@@ -170,7 +170,7 @@ class HomePageProducts(HomePageSetupTemplate):
     acceptance cirteria
     --------------------
     -All of the provided featured products are listed.
-    -When clicking on each of the product's link it opens the "create new account
+    -When clicking on any of the product links it opens the "create new account
      dialogue box".   
     """
 
@@ -191,10 +191,10 @@ class HomePageProducts(HomePageSetupTemplate):
         
         for product in page.products_links:
             product.click()
-            self.assertTrue(page.account_dial_box.exists(),
+            self.assertTrue(page.account_dialogue_box.exists(),
             'create account is not opened when the ' + product.element().text +
             ' link is clicked')
-            page.account_dial_box_close.click()
+            page.account_dialogue_box_close.click()
 
 
 if __name__ == '__main__': unittest.main()
