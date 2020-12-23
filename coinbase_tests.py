@@ -2,7 +2,6 @@
 import unittest
 import platform
 import os
-import time
 
 from selenium import webdriver
 
@@ -53,8 +52,6 @@ class Login(unittest.TestCase):
     def tearDown(self):
 
         self.page.driver.quit()
-
-
 
 
 class LoginErrors(unittest.TestCase):
@@ -115,8 +112,6 @@ class LoginErrors(unittest.TestCase):
         self.page.driver.quit()
 
 
-
-
 class Logout(unittest.TestCase):
 
     def setUp(self):
@@ -150,6 +145,7 @@ class Logout(unittest.TestCase):
 
         self.page.driver.quit()
 
+
 class HomePageSetupTemplate(unittest.TestCase):
     
     def setUp(self):
@@ -165,7 +161,6 @@ class HomePageSignIn(HomePageSetupTemplate):
     """
     Ensure clicking on the sign in link will navigate the user to the sign in 
     page.
-
     acceptance criteria
     ------------------- 
     -Clicking the sign in button navigates to the sign in url.
@@ -181,6 +176,5 @@ class HomePageSignIn(HomePageSetupTemplate):
             (page.driver.title, 'Coinbase - Buy/Sell Cryptocurrency')
         self.assertEqual \
             (page.driver.current_url,'https://www.coinbase.com/signin')
-
 
 if __name__ == '__main__': unittest.main()
