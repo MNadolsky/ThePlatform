@@ -2,7 +2,6 @@
 import unittest
 import platform
 import os
-import time
 
 from selenium import webdriver
 
@@ -53,8 +52,6 @@ class Login(unittest.TestCase):
     def tearDown(self):
 
         self.page.driver.quit()
-
-
 
 
 class LoginErrors(unittest.TestCase):
@@ -115,8 +112,6 @@ class LoginErrors(unittest.TestCase):
         self.page.driver.quit()
 
 
-
-
 class Logout(unittest.TestCase):
 
     def setUp(self):
@@ -152,7 +147,7 @@ class Logout(unittest.TestCase):
 
 
 class HomePageSetupTemplate(unittest.TestCase):
-
+    
     def setUp(self):
         self.driver = webdriver.Chrome(root_path + chromedriver_path)
         self.page = HomePage(self.driver)
@@ -194,6 +189,89 @@ class HomePageCreateAccount(HomePageSetupTemplate):
 
         self.assertTrue(page.create_account_dialogue_box.exists(),
         'create account is not opened when the Get started button is clicked')
+
+
+class HomePageCustomerSecurity(HomePageSetupTemplate):
+    """
+    Confirm that the four links concerning the safety and security of the
+    customer's funds are functional.
+
+    Acceptance Criteria
+    -------------------
+    -Clicking on the Customer fund are secure link navigates the user to the 
+     corresponding url.
+    -Clicking on the Insurance service link navigates the user to the 
+     corresponding url.
+    -Clicking on the Adherence of idustry practice link navigates the user to
+     the corresponding url.
+    -Clicking on the Wallet security link navigates the user to the 
+     corresponding url.  
+    """
+
+    def testSecurityLinks(self):
+        page = self.page
+
+        page.secure_storage_link.click()
+        self.assertEqual(page.driver.title,'Secure Bitcoin Storage - Coinbase')
+        self.assertEqual(
+            page.driver.current_url,'https://www.coinbase.com/security')
+        page.driver.back()
+
+        page.protected_insurance_link.click()
+        self.assertEqual(
+            page.driver.title,'How is Coinbase insured? | Coinbase Help')
+        self.assertEqual(
+            page.driver.current_url, 'https://help.coinbase.com/en/coinbase/' +
+            'other-topics/legal-policies/how-is-coinbase-insured.html')
+        page.driver.back()
+
+        page.industry_best_practices_link.click()
+        self.assertEqual(page.driver.title,'Secure Bitcoin Storage - Coinbase')
+        self.assertEqual(
+            page.driver.current_url,'https://www.coinbase.com/security')
+        page.driver.back()
+
+        page.wallet_link.click()
+        self.assertEqual(page.driver.title,'Coinbase Wallet')
+        self.assertEqual(
+            page.driver.current_url,'https://wallet.coinbase.com/')
+        self.page.driver.back()
+
+
+class HomePageProducts(HomePageSetupTemplate):
+    """
+    Confirm the list of the company's featured products are present on
+    homepage. Ensure that clicking on each product link will navigate to the
+    dialogue box 'create a new account'.
+
+    acceptance cirteria
+    --------------------
+    -All of the provided featured products are listed.
+    -When clicking on any of the product links it opens the "create new account
+     dialogue box".   
+    """
+
+    def testProvidedProducts(self):
+        #below is a mock data set representing a source of truth 
+        provided_featured_products = {'Bitcoin\nBTC', 'Ethereum\nETH', 
+                                      'Bitcoin Cash\nBCH', 'Litecoin\nLTC'} 
+
+        #featured products retrieved from coinbase
+        featured_products = set() 
+        for element in self.page.featured_products:
+            featured_products.add(element.text)
+        
+        self.assertEqual(featured_products, provided_featured_products)
+
+    def testProductsLink(self):
+        page = self.page
+        
+        for product in page.products_links:
+            product.click()
+            self.assertTrue(page.account_dialogue_box.exists(),
+            'create account is not opened when the ' + product.element().text +
+            ' link is clicked')
+            page.account_dialogue_box_close.click()
 
 
 if __name__ == '__main__': unittest.main()
