@@ -47,11 +47,20 @@ class HomePage:
          
     # CREATE ACCOUNT
 
-    email_address_field_loc = (by.XPATH, "//input[@type='email']")
-    get_started_button_loc =  (
+    email_address_field_loc =        (by.XPATH, "//input[@type='email']")
+    get_started_button_loc =         (
         by.XPATH, "//input[@type='email']/following-sibling::button")
 
     # CRYPTO CURRENCY/PRODUCTS MENU
+
+    account_dialogue_box_loc =       (by.XPATH, "//span[.='Create account']")
+    account_dialogue_box_close_loc = (by.XPATH,
+        "//div[contains(@class,'ModalHeader')]/*[name()='svg']")
+
+    # CRYPTO CURRENCY/PRODUCTS MENU
+
+    featured_products_loc = (
+        by.XPATH, "//td[contains(@class,'AssetTableRow')]/div/div")
 
     bitcoin_text_link_loc =  (by.XPATH, "//h4[.='Bitcoin']")
     bitcoin_BTC_link_loc =   (by.XPATH, "//h4[.='BTC']")
@@ -174,6 +183,15 @@ class HomePage:
             self.driver, self.get_started_button_loc)
 
         # CRYPTO CURRENCY/PRODUCTS MENU
+        self.account_dialogue_box =        Element(
+            self.driver,self.account_dialogue_box_loc)
+        self.account_dialogue_box_close =  Button(
+            self.driver,self.account_dialogue_box_close_loc)
+
+        # CRYPTO CURRENCY/PRODUCTS MENU
+
+        self.featured_products = self.driver.find_elements(
+            *self.featured_products_loc)
         
         self.bitcoin_text_link =  Link(self.driver,self.bitcoin_text_link_loc)
         self.bitcoin_BTC_link =   Link(self.driver,self.bitcoin_BTC_link_loc)
@@ -198,6 +216,16 @@ class HomePage:
         self.litecoin_logo_link = Link(self.driver,self.litecoin_logo_link_loc)
         self.litecoin_buy_button = Button(
             self.driver, self.litecoin_buy_button_loc)
+
+        self.products_links = [
+            self.bitcoin_text_link,     self.bitcoin_BTC_link, 
+            self.bitcoin_logo_link,     self.bitcoin_buy_button, 
+            self.ethereum_text_link,    self.ethereum_ETH_link,
+            self.ethereum_logo_link,    self.ethereum_buy_button,
+            self.bitcoinCash_text_link, self.bitcoinCash_BCH_link,
+            self.bitcoinCash_logo_link, self.bitcoinCash_buy_button,
+            self.litecoin_text_link,    self.litecoin_LTC_link,
+            self.litecoin_logo_link,    self.litecoin_buy_button]
 
         # EARNING LINKS BLCOK
 
