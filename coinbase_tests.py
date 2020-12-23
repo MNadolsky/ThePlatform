@@ -151,7 +151,6 @@ class Logout(unittest.TestCase):
 
 class HomePageSetupTemplate(unittest.TestCase):
 
-<<<<<<< HEAD
     def setUp(self):
         self.driver = webdriver.Chrome(root_path + chromedriver_path)
         self.page = HomePage(self.driver)
@@ -194,17 +193,6 @@ class HomePageCustomerSecurity(HomePageSetupTemplate):
             page.driver.current_url, 'https://help.coinbase.com/en/coinbase/' +
             'other-topics/legal-policies/how-is-coinbase-insured.html')
         page.driver.back()
-=======
-class HomePageSetupTemplate(unittest.TestCase):
-
-    def setUp(self):
-        self.driver = webdriver.Chrome(root_path + chromedriver_path)
-        self.page = HomePage(self.driver)
-    
-    def tearDown(self):
-
-        self.page.driver.quit()
->>>>>>> project
 
         page.industry_best_practices_link.click()
         self.assertEqual(page.driver.title,'Secure Bitcoin Storage - Coinbase')
@@ -212,13 +200,12 @@ class HomePageSetupTemplate(unittest.TestCase):
             page.driver.current_url,'https://www.coinbase.com/security')
         page.driver.back()
 
-<<<<<<< HEAD
         page.wallet_link.click()
         self.assertEqual(page.driver.title,'Coinbase Wallet')
         self.assertEqual(
             page.driver.current_url,'https://wallet.coinbase.com/')
-        page.driver.back()
-=======
+        self.page.driver.back()
+
 class HomePageProducts(HomePageSetupTemplate):
     """
     Confirm the list of the company's featured products are present on
@@ -254,6 +241,5 @@ class HomePageProducts(HomePageSetupTemplate):
             ' link is clicked')
             page.account_dialogue_box_close.click()
 
->>>>>>> project
 
 if __name__ == '__main__': unittest.main()
